@@ -3,7 +3,7 @@ from osbot_aws.aws.s3.S3                            import S3
 from osbot_utils.decorators.methods.cache_on_self   import cache_on_self
 from osbot_utils.type_safe.Type_Safe                import Type_Safe
 
-#dns_entry                    = 'https://web-content-filtering.mgraph-ai'      
+#dns_entry                    = 'https://web-content-filtering.mgraph-ai'
 
 WEB_CONTENT_FILTERING__PROJECT_NAME = "web-content-filtering"
 
