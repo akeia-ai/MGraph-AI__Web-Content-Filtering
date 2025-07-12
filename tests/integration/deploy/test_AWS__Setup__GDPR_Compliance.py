@@ -1,7 +1,6 @@
-from unittest                                                       import TestCase
-from osbot_utils.utils.Env                                          import load_dotenv
-
-from mgraph_ai_web_content_filtering.deploy.AWS__Setup__Web_Content_Filtering import AWS__Setup__Web_Content_Filtering
+from unittest                                                                   import TestCase
+from osbot_utils.utils.Env                                                      import load_dotenv
+from mgraph_ai_web_content_filtering.deploy.AWS__Setup__Web_Content_Filtering   import AWS__Setup__Web_Content_Filtering
 
 
 class test_AWS__Setup__Web_Content_Filtering(TestCase):
@@ -29,3 +28,16 @@ class test_AWS__Setup__Web_Content_Filtering(TestCase):
         with self.aws_setup as _:
             assert _.s3__bucket__setup() == {'bucket__exists': True ,
                                              'bucket_created': False}
+
+    def test_osbot__lambdas__iam__setup(self):
+        with self.aws_setup as _:
+            assert _.osbot__lambdas__iam__setup() is True
+
+    def test_osbot__lambdas__s3__bucket_name(self):
+        with self.aws_setup as _:
+            assert _.osbot__lambdas__s3__bucket_name() ==  "180929110226--osbot-lambdas--eu-west-1"
+
+    def test_osbot__lambdas__s3__osbot__lambdas__setup(self):
+        with self.aws_setup as _:
+            assert _.osbot__lambdas__s3__osbot__lambdas__setup() == { 'bucket__exists': True ,
+                                                      'bucket_created': False}

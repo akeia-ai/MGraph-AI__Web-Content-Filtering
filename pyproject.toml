@@ -12,8 +12,10 @@ repository  = "https://github.com/the-cyber-boardroom/MGraph-AI__Web-Content-Fil
 python            = "^3.12"
 osbot-utils       = "*"
 osbot-aws         = "*"
+osbot-fast-api    = "*"
 memory-fs         = "*"
 mgraph-db         = "*"
+mangum            = "*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

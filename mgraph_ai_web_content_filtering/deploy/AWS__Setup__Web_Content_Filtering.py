@@ -1,4 +1,5 @@
 from osbot_aws.AWS_Config                           import AWS_Config
+from osbot_aws.apis.test_helpers.Temp_Aws_Roles     import Temp_Aws_Roles
 from osbot_aws.aws.s3.S3                            import S3
 from osbot_utils.decorators.methods.cache_on_self   import cache_on_self
 from osbot_utils.type_safe.Type_Safe                import Type_Safe
@@ -6,6 +7,7 @@ from osbot_utils.type_safe.Type_Safe                import Type_Safe
 #dns_entry                    = 'https://web-content-filtering.mgraph-ai'
 
 WEB_CONTENT_FILTERING__PROJECT_NAME = "web-content-filtering"
+OSBOT__LAMBDAS__BUCKET_NAME         = 'osbot-lambdas'
 
 class AWS__Setup__Web_Content_Filtering(Type_Safe):
 
@@ -46,3 +48,36 @@ class AWS__Setup__Web_Content_Filtering(Type_Safe):
         result = dict(bucket_created =  bucket_created,               # this will only be true the one time the bucket is created
                       bucket__exists = bucket_exists  )
         return result
+
+    def osbot__lambdas__iam__setup(self):
+        temp_aws_roles = Temp_Aws_Roles()
+        if temp_aws_roles.for_lambda_invocation__not_exists():
+            temp_aws_roles.for_lambda_invocation__create()
+            return temp_aws_roles.for_lambda_invocation_exists()
+        return True
+
+    def osbot__lambdas__s3__bucket_name(self):
+        return f"{self.aws__account_id()}--{OSBOT__LAMBDAS__BUCKET_NAME}--{self.aws__region_name()}"
+
+    def osbot__lambdas__s3__osbot__lambdas__setup(self):
+        osbot_lambdas_bucket_name = self.osbot__lambdas__s3__bucket_name()
+        bucket_exists = self.s3().bucket_exists(osbot_lambdas_bucket_name)
+        bucket_created = False
+
+        if bucket_exists is False:
+            region_name = self.aws__region_name()
+            if self.s3().bucket_create(bucket=osbot_lambdas_bucket_name, region=region_name):
+                bucket_created = True
+                bucket_exists  = True
+
+        result = dict(bucket_created =  bucket_created,               # this will only be true the one time the bucket is created
+                      bucket__exists = bucket_exists  )
+        return result
+
+    # todo: convert to method in this class
+    # def test_setup_lambda_fast_api(self):
+    #     packages_to_install = ['fastapi', 'mangum']
+    #     from osbot_aws.helpers.Lambda_Upload_Package import Lambda_Upload_Package
+    #     lambda_upload = Lambda_Upload_Package()
+    #     result = lambda_upload.upload_to_s3(packages_to_install)
+    #     pprint(result)
