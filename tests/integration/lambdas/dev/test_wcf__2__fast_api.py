@@ -1,8 +1,7 @@
-from unittest                                                  import TestCase
-from osbot_aws.aws.lambda_.Lambda                              import Lambda
-from osbot_aws.deploy.Deploy_Lambda                            import Deploy_Lambda
-from mgraph_ai_web_content_filtering.lambdas.dev.wcf__fast_api import run, WCF__FAST_API__RETURN_MESSAGE
-
+from unittest                                                     import TestCase
+from osbot_aws.aws.lambda_.Lambda                                 import Lambda
+from osbot_aws.deploy.Deploy_Lambda                               import Deploy_Lambda
+from mgraph_ai_web_content_filtering.lambdas.dev.wcf__2__fast_api import run, WCF__FAST_API__RETURN_MESSAGE
 
 class test_wcf__fast_api(TestCase):
     lambda_ : Lambda

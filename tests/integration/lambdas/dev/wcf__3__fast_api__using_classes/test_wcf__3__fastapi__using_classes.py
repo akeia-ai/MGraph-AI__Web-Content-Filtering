@@ -1,11 +1,10 @@
-from urllib.error import HTTPError
+from urllib.error                                                                       import HTTPError
+from osbot_aws.deploy.Deploy_Lambda                                                     import Deploy_Lambda
+from osbot_utils.utils.Http                                                             import GET, GET_json
+from mgraph_ai_web_content_filtering.lambdas.dev.wcf__3__fastapi__using_classes.handler import run
+from mgraph_ai_web_content_filtering.testing.TestCase__FastAPI__Lambda                  import TestCase__FastAPI__Lambda, TEST__FASTAPI__ROUTE__RETURN_MESSAGE
 
-from osbot_aws.deploy.Deploy_Lambda                                                  import Deploy_Lambda
-from osbot_utils.utils.Http                                                          import GET, GET_json
-from mgraph_ai_web_content_filtering.lambdas.dev.wcf__fastapi__using_classes.handler import run
-from mgraph_ai_web_content_filtering.testing.TestCase__FastAPI__Lambda               import TestCase__FastAPI__Lambda, TEST__FASTAPI__ROUTE__RETURN_MESSAGE
-
-class test_handler(TestCase__FastAPI__Lambda):
+class test_wcf__3__fastapi__using_classes(TestCase__FastAPI__Lambda):
 
     @classmethod
     def setUpClass(cls) -> None:
@@ -30,10 +29,11 @@ class test_handler(TestCase__FastAPI__Lambda):
         with self.deploy_lambda as _:
             _.add_osbot_aws()
             assert _.deploy() is True
-            #self.test_3__invoke__on_aws()
+            # self.test_3__invoke__on_aws()
 
     def test_3__invoke__on_aws(self):
-        assert self.deploy_lambda.invoke(self.payload) == self.response
+        with self.deploy_lambda as _:
+            assert _.invoke(self.payload) == self.response
 
     def test_4__invoke__on_aws__via__function_url(self):
         with self.deploy_lambda.lambda_function() as _:

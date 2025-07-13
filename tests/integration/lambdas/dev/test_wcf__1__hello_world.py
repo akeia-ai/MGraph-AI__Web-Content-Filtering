@@ -1,9 +1,8 @@
-from unittest                                                     import TestCase
-from osbot_aws.aws.sts.STS                                        import STS
-from osbot_aws.aws.lambda_.Lambda                                 import Lambda
-from osbot_aws.deploy.Deploy_Lambda                               import Deploy_Lambda
-from osbot_utils.helpers.duration.decorators.print_duration       import print_duration
-from mgraph_ai_web_content_filtering.lambdas.dev.wcf__hello_world import run, STR_FORMAT__RETURN_MESSAGE
+from unittest                                                        import TestCase
+from osbot_aws.aws.sts.STS                                           import STS
+from osbot_aws.aws.lambda_.Lambda                                    import Lambda
+from osbot_aws.deploy.Deploy_Lambda                                  import Deploy_Lambda
+from mgraph_ai_web_content_filtering.lambdas.dev.wcf__1__hello_world import run, STR_FORMAT__RETURN_MESSAGE
 
 
 class test_hello_world(TestCase):
