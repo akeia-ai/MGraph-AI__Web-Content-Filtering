@@ -11,7 +11,7 @@ class test_hello_world(TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-        with print_duration(action_name='create lambda'):
+        #with print_duration(action_name='create lambda'):
             STS().check_current_session_credentials()
             cls.handler     = run
             cls.deploy      = Deploy_Lambda(cls.handler)
@@ -22,7 +22,7 @@ class test_hello_world(TestCase):
 
     @classmethod
     def tearDownClass(cls) -> None:
-        with print_duration(action_name='delete lambda'):
+        #with print_duration(action_name='delete lambda'):
             assert cls.lambda_.delete() is True
 
 

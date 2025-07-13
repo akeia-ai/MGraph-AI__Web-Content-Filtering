@@ -13,7 +13,7 @@ class test_wcf__fast_api(TestCase):
         cls.deploy         = Deploy_Lambda(cls.handler)
         cls.lambda_name    = cls.deploy.lambda_name()
         cls.lambda_        = Lambda(name= cls.lambda_name)
-        cls.delete_on_exit = False
+        cls.delete_on_exit = True
 
     @classmethod
     def tearDownClass(cls) -> None:
@@ -44,7 +44,7 @@ class test_wcf__fast_api(TestCase):
         assert run(payload) == response
 
     #@print_boto3_calls()
-    def test_2__deploy__and__invoke(self):
+    def test_2__deploy(self):
         self.deploy.add_osbot_aws()
         assert self.deploy.deploy() is True
         if self.lambda_.function_url_exists() is False:
