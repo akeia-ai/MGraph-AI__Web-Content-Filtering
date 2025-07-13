@@ -1,6 +1,8 @@
 # for testing
 osbot-utils
 osbot-aws
+osbot-fast-api
+mangum
+
 pytest
 pytest-cov
-requests
