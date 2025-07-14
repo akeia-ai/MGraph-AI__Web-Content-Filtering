@@ -1,15 +1,25 @@
-from osbot_aws.AWS_Config                           import AWS_Config
-from osbot_aws.apis.test_helpers.Temp_Aws_Roles     import Temp_Aws_Roles
-from osbot_aws.aws.s3.S3                            import S3
-from osbot_utils.decorators.methods.cache_on_self   import cache_on_self
-from osbot_utils.type_safe.Type_Safe                import Type_Safe
+from osbot_aws.AWS_Config import AWS_Config
+from osbot_aws.apis.test_helpers.Temp_Aws_Roles import Temp_Aws_Roles
+from osbot_aws.aws.s3.S3 import S3
+from osbot_utils.decorators.methods.cache_on_self import cache_on_self
+from osbot_utils.helpers.Safe_Id        import Safe_Id
+from osbot_utils.type_safe.Type_Safe    import Type_Safe
 
-#dns_entry                    = 'https://web-content-filtering.mgraph-ai'
+class Schema__AWS_Setup__Config(Type_Safe):
+    project_name            : Safe_Id = Safe_Id('web-content-filtering')
+    osbot_lambdas_bucket_id : Safe_Id = Safe_Id('osbot-lambdas'        )
 
-WEB_CONTENT_FILTERING__PROJECT_NAME = "web-content-filtering"
-OSBOT__LAMBDAS__BUCKET_NAME         = 'osbot-lambdas'
 
-class AWS__Setup__Web_Content_Filtering(Type_Safe):
+class Schema__AWS_Setup__Status(Type_Safe):
+    config: Schema__AWS_Setup__Config
+
+
+class WCF__AWS__Deploy(Type_Safe):
+    setup_config : Schema__AWS_Setup__Config
+
+    def setup_lambda_function(self):
+        setup_status = Schema__AWS_Setup__Status()
+        return setup_status
 
     @cache_on_self
     def s3(self):
@@ -29,7 +39,7 @@ class AWS__Setup__Web_Content_Filtering(Type_Safe):
         return self.aws_config().region_name()
 
     def s3__bucket__name(self):
-        return f"{WEB_CONTENT_FILTERING__PROJECT_NAME}--{self.aws__account_id()}--{self.aws__region_name()}"
+        return f"{self.setup_config.project_name}--{self.aws__account_id()}--{self.aws__region_name()}"
 
     def s3__bucket__exists(self):
         return self.s3().bucket_exists(self.s3__bucket__name())
@@ -57,7 +67,7 @@ class AWS__Setup__Web_Content_Filtering(Type_Safe):
         return True
 
     def osbot__lambdas__s3__bucket_name(self):
-        return f"{self.aws__account_id()}--{OSBOT__LAMBDAS__BUCKET_NAME}--{self.aws__region_name()}"
+        return f"{self.aws__account_id()}--{self.setup_config.osbot_lambdas_bucket_id}--{self.aws__region_name()}"
 
     def osbot__lambdas__s3__osbot__lambdas__setup(self):
         osbot_lambdas_bucket_name = self.osbot__lambdas__s3__bucket_name()
@@ -74,3 +84,10 @@ class AWS__Setup__Web_Content_Filtering(Type_Safe):
                       bucket__exists = bucket_exists  )
         return result
 
+    # todo: convert to method in this class (and see if current code checks if dependencies already exist before installing them locally)
+    # def test_setup_lambda_fast_api(self):
+    #     packages_to_install = ['fastapi', 'mangum']
+    #     from osbot_aws.helpers.Lambda_Upload_Package import Lambda_Upload_Package
+    #     lambda_upload = Lambda_Upload_Package()
+    #     result = lambda_upload.upload_to_s3(packages_to_install)
+    #     pprint(result)
