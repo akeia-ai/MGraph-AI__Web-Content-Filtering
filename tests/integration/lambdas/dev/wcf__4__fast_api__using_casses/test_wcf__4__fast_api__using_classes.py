@@ -1,4 +1,6 @@
 import json
+
+from mgraph_ai_web_content_filtering.utils.testing.TestCase__FastAPI__Lambda                             import TestCase__FastAPI__Lambda
 from osbot_aws.deploy.Deploy_Lambda                                                                      import Deploy_Lambda
 from osbot_fast_api.api.Fast_API                                                                         import Fast_API
 from osbot_fast_api.utils.Version                                                                        import version__osbot_fast_api
@@ -6,15 +8,13 @@ from osbot_utils.type_safe.Type_Safe                                            
 from osbot_utils.utils.Objects                                                                           import base_classes
 from mgraph_ai_web_content_filtering.lambdas.dev.wcf__4__fast_api__using_classes.Fast_API__Using_Classes import Fast_API__Using_Classes, FAST_API__ROUTE_1__PATH, FAST_API__ROUTE_1__MESSAGE, FAST_API__ROUTE_2__PATH, FAST_API__ROUTE_2__MESSAGE
 from mgraph_ai_web_content_filtering.lambdas.dev.wcf__4__fast_api__using_classes.handler                 import run, fast_api_using_classes
-from mgraph_ai_web_content_filtering.testing.TestCase__FastAPI__Lambda                                   import TestCase__FastAPI__Lambda
 
 class test_wcf__4__fast_api__using_classes(TestCase__FastAPI__Lambda):
 
     @classmethod
     def setUpClass(cls) -> None:
-        cls.handler                               = run
-        cls.deploy_lambda                         = Deploy_Lambda(cls.handler)
-        cls.delete_on_exit                        = True
+        cls.handler = run
+        super().setUpClass()
         cls.deploy_lambda.package.aws_lambda.name = 'wcf__4__fast_api__using_classes'       # we have to do this little fix because the default name is bigger than 64 chars ('mgraph_ai_web_content_filtering_lambdas_dev_fastapi__using_classes_handler')
 
     @classmethod

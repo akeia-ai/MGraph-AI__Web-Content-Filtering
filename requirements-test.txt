@@ -1,8 +1,14 @@
-# for testing
+# for main app
 osbot-utils
 osbot-aws
 osbot-fast-api
 mangum
 
+# for pytest
 pytest
 pytest-cov
+
+
+# for fastapi testing
+httpx
+

@@ -1,7 +1,7 @@
-from unittest                                                       import TestCase
-from osbot_utils.utils.Http                                         import GET_json
-from osbot_aws.aws.lambda_.Lambda                                   import Lambda
-from mgraph_ai_web_content_filtering.wcf__fast_api.WCF__AWS__Deploy import WCF__AWS__Deploy, Schema__AWS_Setup__Status, WCF__LAMBDA__FUNCTION_NAME
+from unittest                                                             import TestCase
+from osbot_utils.utils.Http                                               import GET_json
+from osbot_aws.aws.lambda_.Lambda                                         import Lambda
+from mgraph_ai_web_content_filtering.wcf__fast_api.setup.WCF__AWS__Deploy import WCF__AWS__Deploy, Schema__AWS_Setup__Status, WCF__LAMBDA__FUNCTION_NAME
 
 
 class test_WCF__Lambda__Deploy(TestCase):
@@ -21,12 +21,17 @@ class test_WCF__Lambda__Deploy(TestCase):
     #         from osbot_utils.utils.Dev import pprint
     #         pprint(distribution_id)
 
-    def test_setup_lambda_function(self):
+    # todo: to implement this function which goes though the setup workflow and checks that all is ok
+    # def test_setup_lambda_function(self):
+    #     with self.wcf_aws_deploy as _:
+    #         setup_status = _.setup_lambda_function()
+    #         assert type(setup_status) is Schema__AWS_Setup__Status
+    #         assert setup_status.json() == { 'config': { 'osbot_lambdas_bucket_id': 'osbot-lambdas'         ,
+    #                                                     'project_name'           : 'web-content-filtering'}}
+
+    def test_lambda__deploy(self):
         with self.wcf_aws_deploy as _:
-            setup_status = _.setup_lambda_function()
-            assert type(setup_status) is Schema__AWS_Setup__Status
-            assert setup_status.json() == { 'config': { 'osbot_lambdas_bucket_id': 'osbot-lambdas'         ,
-                                                        'project_name'           : 'web-content-filtering'}}
+            assert _.lambda__deploy() is True
 
     def test_lambda__function_url__setup(self):
 

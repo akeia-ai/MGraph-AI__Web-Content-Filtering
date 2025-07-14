@@ -1,3 +1,4 @@
+from mgraph_ai_web_content_filtering.utils.testing.TestCase__FastAPI__Lambda                                    import TestCase__FastAPI__Lambda
 from osbot_aws.deploy.Deploy_Lambda                                                                             import Deploy_Lambda
 from osbot_fast_api.api.Fast_API                                                                                import Fast_API
 from osbot_fast_api.api.Fast_API__Http_Event                                                                    import Fast_API__Http_Event
@@ -8,15 +9,13 @@ from osbot_utils.utils.Misc                                                     
 from osbot_utils.utils.Objects                                                                                  import base_classes
 from mgraph_ai_web_content_filtering.lambdas.dev.wcf__5__fast_api__with_router.WCF__5__Fast_API__With_Router    import WCF__5__Fast_API__With_Router
 from mgraph_ai_web_content_filtering.lambdas.dev.wcf__5__fast_api__with_router.handler                          import run, fast_api_with_router
-from mgraph_ai_web_content_filtering.testing.TestCase__FastAPI__Lambda                                          import TestCase__FastAPI__Lambda
 
 class test_wcf__5__fast_api__with_router(TestCase__FastAPI__Lambda):
 
     @classmethod
     def setUpClass(cls) -> None:
-        cls.handler                               = run
-        cls.deploy_lambda                         = Deploy_Lambda(cls.handler)
-        cls.delete_on_exit                        = True
+        cls.handler = run
+        super().setUpClass()
         cls.deploy_lambda.package.aws_lambda.name = 'wcf__5__fast_api__with_router'       # we have to do this little fix because the default name is bigger than 64 chars ('mgraph_ai_web_content_filtering_lambdas_dev_fastapi__using_classes_handler')
 
     @classmethod

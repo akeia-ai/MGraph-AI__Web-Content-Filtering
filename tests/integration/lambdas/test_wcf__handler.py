@@ -1,6 +1,5 @@
-from osbot_aws.deploy.Deploy_Lambda                                     import Deploy_Lambda
-from mgraph_ai_web_content_filtering.lambdas.wcf__handler               import run
-from mgraph_ai_web_content_filtering.testing.TestCase__FastAPI__Lambda  import TestCase__FastAPI__Lambda
+from mgraph_ai_web_content_filtering.lambdas.wcf__handler                     import run
+from mgraph_ai_web_content_filtering.utils.testing.TestCase__FastAPI__Lambda  import TestCase__FastAPI__Lambda
 
 
 class test_wcf__handler(TestCase__FastAPI__Lambda):
@@ -27,3 +26,8 @@ class test_wcf__handler(TestCase__FastAPI__Lambda):
             assert response.get('statusCode') == 404
             assert response.get('body'      ) == '{"detail":"Not Found"}'
 
+    def test_4__invoke__on_aws__return_logs(self):
+        with self.deploy_lambda as _:
+            response = _.invoke_return_logs(self.request_payload('/'))
+            from osbot_utils.utils.Dev import pprint
+            pprint(response)

@@ -1,6 +1,7 @@
 import types
-from unittest                       import TestCase
-from osbot_aws.deploy.Deploy_Lambda import Deploy_Lambda
+from unittest                                                   import TestCase
+from mgraph_ai_web_content_filtering.utils.testing.skip_tests   import skip__if_not__in_github_actions
+from osbot_aws.deploy.Deploy_Lambda                             import Deploy_Lambda
 
 TEST__FASTAPI__ROUTE__RETURN_MESSAGE = 'This is from fast api'
 
@@ -9,6 +10,8 @@ class TestCase__FastAPI__Lambda(TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
+        skip__if_not__in_github_actions()
+
         cls.deploy_lambda                         = Deploy_Lambda(cls.handler)          # this needs to be setup by the class that uses this helper class
         cls.delete_on_exit                        = False
 

@@ -1,4 +1,5 @@
 from unittest                                                     import TestCase
+from mgraph_ai_web_content_filtering.utils.testing.skip_tests     import skip__if_not__in_github_actions
 from osbot_aws.aws.lambda_.Lambda                                 import Lambda
 from osbot_aws.deploy.Deploy_Lambda                               import Deploy_Lambda
 from mgraph_ai_web_content_filtering.lambdas.dev.wcf__2__fast_api import run, WCF__FAST_API__RETURN_MESSAGE
@@ -8,6 +9,8 @@ class test_wcf__fast_api(TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
+        skip__if_not__in_github_actions()
+
         cls.handler        = run
         cls.deploy         = Deploy_Lambda(cls.handler)
         cls.lambda_name    = cls.deploy.lambda_name()

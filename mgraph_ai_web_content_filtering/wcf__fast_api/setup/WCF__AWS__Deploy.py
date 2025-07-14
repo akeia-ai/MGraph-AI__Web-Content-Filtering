@@ -1,12 +1,13 @@
-from osbot_aws.aws.lambda_.Lambda import Lambda
-
-from osbot_aws.AWS_Config                           import AWS_Config
-from osbot_aws.apis.test_helpers.Temp_Aws_Roles     import Temp_Aws_Roles
-from osbot_aws.aws.cloud_front.Cloud_Front          import Cloud_Front
-from osbot_aws.aws.s3.S3                            import S3
-from osbot_utils.decorators.methods.cache_on_self   import cache_on_self
-from osbot_utils.helpers.Safe_Id                    import Safe_Id
-from osbot_utils.type_safe.Type_Safe                import Type_Safe
+from mgraph_ai_web_content_filtering.lambdas.wcf__handler   import run
+from osbot_aws.deploy.Deploy_Lambda                         import Deploy_Lambda
+from osbot_aws.aws.lambda_.Lambda                           import Lambda
+from osbot_aws.AWS_Config                                   import AWS_Config
+from osbot_aws.apis.test_helpers.Temp_Aws_Roles             import Temp_Aws_Roles
+from osbot_aws.aws.cloud_front.Cloud_Front                  import Cloud_Front
+from osbot_aws.aws.s3.S3                                    import S3
+from osbot_utils.decorators.methods.cache_on_self           import cache_on_self
+from osbot_utils.helpers.Safe_Id                            import Safe_Id
+from osbot_utils.type_safe.Type_Safe                        import Type_Safe
 
 WCF__LAMBDA__FUNCTION_NAME = 'mgraph_ai_web_content_filtering_lambdas_wcf__handler'
 WCF__DNS_NAME              = 'web-content-filtering.mgraph.ai'
@@ -69,6 +70,13 @@ class WCF__AWS__Deploy(Type_Safe):
         result = dict(bucket_created =  bucket_created,               # this will only be true the one time the bucket is created
                       bucket__exists = bucket_exists  )
         return result
+
+    def lambda__deploy(self):
+        handler = run                                                   # todo: add support for dev, qa and prod versions of this lambda
+        with Deploy_Lambda(handler=handler) as _:
+            _.add_osbot_aws()
+            _.add_module('osbot_fast_api')
+            return _.deploy()
 
     def lambda__function_url__setup(self, lambda_function: Lambda):
         function_url = lambda_function.function_url()
