@@ -82,3 +82,22 @@ class test_wcf__4__fast_api__using_classes(TestCase__FastAPI__Lambda):
         assert response__new_route_2.get('body'      ) == FAST_API__ROUTE_2__MESSAGE
         assert response__new_route_2.get('body'      ) == 'message from route 2'
         assert response__new_route_2.get('statusCode') == 201
+
+    def test_7__deploy(self):
+        with self.deploy_lambda as _:
+            _.add_osbot_aws()
+            _.add_module('osbot_fast_api')
+            assert _.deploy() is True
+            #self.test_8__invoke__on_aws()
+
+    def test_8__invoke__on_aws(self):
+        with self.deploy_lambda as _:
+            request__new_route_1  = self.request_payload(path=FAST_API__ROUTE_1__PATH)
+            response__new_route_1 = _.invoke(request__new_route_1)
+            fast_api_request_id   =  response__new_route_1.get('headers').get('fast-api-request-id')
+            assert response__new_route_1 == { 'body'            : '"message from route 1"',
+                                              'headers'         : { 'content-length'     : '22'                 ,
+                                                                    'content-type'       : 'application/json'   ,
+                                                                    'fast-api-request-id': fast_api_request_id} ,
+                                              'isBase64Encoded' : False                                         ,
+                                              'statusCode'      : 200                                           }

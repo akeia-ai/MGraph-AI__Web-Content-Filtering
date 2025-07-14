@@ -78,35 +78,56 @@ class test_wcf__5__fast_api__with_router(TestCase__FastAPI__Lambda):
         http_event_traces   = request_http_event_json.get('http_event_traces'  )
 
         fast_api_name = WCF__5__Fast_API__With_Router.__name__
-        info_id       = http_event_info   .get('info_id'   )
-        thread_id     = http_event_info   .get('thread_id' )
-        timestamp     = http_event_info   .get('timestamp' )
+        info_id       = http_event_info    .get('info_id'    )
+        thread_id     = http_event_info    .get('thread_id'  )
+        timestamp     = http_event_info    .get('timestamp'  )
 
-        duration      = http_event_request.get('duration'  )
-        request_id    = http_event_request.get('request_id')
-        start_time    = http_event_request.get('start_time')
+        duration      = http_event_request .get('duration'   )
+        request_id    = http_event_request .get('request_id' )
+        start_time    = http_event_request .get('start_time' )
 
-        assert event_id           == request__id__guid
-        assert http_event_info    == { 'client_city'    : None          ,
-                                       'client_country' : None          ,
-                                       'client_ip'      : '127.0.0.1'   ,
-                                       'domain'         : None          ,
-                                       'event_id'       : event_id      ,
-                                       'fast_api_name'  : fast_api_name ,
-                                       'info_id'        : info_id       ,
-                                       'log_messages'   : []            ,
-                                       'thread_id'      : thread_id     ,
-                                       'timestamp'      : timestamp     }
+        end_time      = http_event_response.get('end_time'   )
+        response_id   = http_event_response.get('response_id')
 
-        assert http_event_request == { 'duration'       : duration      ,
-                                       'event_id'       : event_id      ,
-                                       'headers'        : {}            ,
-                                       'host_name'      : 'mangum'      ,
-                                       'method'         : 'GET'         ,
-                                       'path'           : '/AAAAAAA'    ,
-                                       'port'           : 80            ,
-                                       'request_id'     : request_id    ,
-                                       'start_time'     : start_time    }
+        traces_id     = http_event_traces  .get('traces_id'  )
+
+
+        assert event_id            == request__id__guid
+        assert http_event_info     == { 'client_city'    : None          ,
+                                        'client_country' : None          ,
+                                        'client_ip'      : '127.0.0.1'   ,
+                                        'domain'         : None          ,
+                                        'event_id'       : event_id      ,
+                                        'fast_api_name'  : fast_api_name ,
+                                        'info_id'        : info_id       ,
+                                        'log_messages'   : []            ,
+                                        'thread_id'      : thread_id     ,
+                                        'timestamp'      : timestamp     }
+
+        assert http_event_request  == { 'duration'       : duration      ,
+                                        'event_id'       : event_id      ,
+                                        'headers'        : {}            ,
+                                        'host_name'      : 'mangum'      ,
+                                        'method'         : 'GET'         ,
+                                        'path'           : '/AAAAAAA'    ,
+                                        'port'           : 80            ,
+                                        'request_id'     : request_id    ,
+                                        'start_time'     : start_time    }
+
+        assert http_event_response == { 'content_length' : '22'                                         ,
+                                        'content_type'   : 'application/json'                           ,
+                                        'end_time'       : end_time                                     ,
+                                        'event_id'       : event_id                                     ,
+                                        'headers'        : { 'content-length'     : '22'               ,
+                                                             'content-type'       : 'application/json' ,
+                                                             'fast-api-request-id': request__id__guid  },
+                                        'response_id'    : response_id                                  ,
+                                        'status_code'    : 404                                          }
+
+        assert http_event_traces   == { 'event_id'       : event_id      ,
+                                        'traces'         : []            ,
+                                        'traces_count'   : 0             ,
+                                        'traces_id'      : traces_id     }
 
 
 
