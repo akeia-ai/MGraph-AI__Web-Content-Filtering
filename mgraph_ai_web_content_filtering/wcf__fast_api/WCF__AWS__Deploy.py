@@ -1,9 +1,15 @@
-from osbot_aws.AWS_Config import AWS_Config
-from osbot_aws.apis.test_helpers.Temp_Aws_Roles import Temp_Aws_Roles
-from osbot_aws.aws.s3.S3 import S3
-from osbot_utils.decorators.methods.cache_on_self import cache_on_self
-from osbot_utils.helpers.Safe_Id        import Safe_Id
-from osbot_utils.type_safe.Type_Safe    import Type_Safe
+from osbot_aws.aws.lambda_.Lambda import Lambda
+
+from osbot_aws.AWS_Config                           import AWS_Config
+from osbot_aws.apis.test_helpers.Temp_Aws_Roles     import Temp_Aws_Roles
+from osbot_aws.aws.cloud_front.Cloud_Front          import Cloud_Front
+from osbot_aws.aws.s3.S3                            import S3
+from osbot_utils.decorators.methods.cache_on_self   import cache_on_self
+from osbot_utils.helpers.Safe_Id                    import Safe_Id
+from osbot_utils.type_safe.Type_Safe                import Type_Safe
+
+WCF__LAMBDA__FUNCTION_NAME = 'mgraph_ai_web_content_filtering_lambdas_wcf__handler'
+WCF__DNS_NAME              = 'web-content-filtering.mgraph.ai'
 
 class Schema__AWS_Setup__Config(Type_Safe):
     project_name            : Safe_Id = Safe_Id('web-content-filtering')
@@ -17,9 +23,9 @@ class Schema__AWS_Setup__Status(Type_Safe):
 class WCF__AWS__Deploy(Type_Safe):
     setup_config : Schema__AWS_Setup__Config
 
-    def setup_lambda_function(self):
-        setup_status = Schema__AWS_Setup__Status()
-        return setup_status
+    @cache_on_self
+    def cloud_front(self):
+        return Cloud_Front()
 
     @cache_on_self
     def s3(self):
@@ -29,6 +35,8 @@ class WCF__AWS__Deploy(Type_Safe):
     def aws_config(self):
         return AWS_Config()
 
+    #######
+
     def aws__account_id(self):
         return self.aws_config().account_id()
 
@@ -37,6 +45,9 @@ class WCF__AWS__Deploy(Type_Safe):
 
     def aws__region_name(self):
         return self.aws_config().region_name()
+
+    def cloud_front__distribution_id(self):
+        return self.cloud_front().distributions()
 
     def s3__bucket__name(self):
         return f"{self.setup_config.project_name}--{self.aws__account_id()}--{self.aws__region_name()}"
@@ -59,18 +70,25 @@ class WCF__AWS__Deploy(Type_Safe):
                       bucket__exists = bucket_exists  )
         return result
 
-    def osbot__lambdas__iam__setup(self):
+    def lambda__function_url__setup(self, lambda_function: Lambda):
+        function_url = lambda_function.function_url()
+        if lambda_function.function_url_exists() is False:
+            lambda_function.function_url_create_with_public_access()
+            function_url = lambda_function.function_url()
+        return function_url
+
+    def lambdas__iam__setup(self):
         temp_aws_roles = Temp_Aws_Roles()
         if temp_aws_roles.for_lambda_invocation__not_exists():
             temp_aws_roles.for_lambda_invocation__create()
             return temp_aws_roles.for_lambda_invocation_exists()
         return True
 
-    def osbot__lambdas__s3__bucket_name(self):
+    def lambdas__s3__bucket_name(self):
         return f"{self.aws__account_id()}--{self.setup_config.osbot_lambdas_bucket_id}--{self.aws__region_name()}"
 
-    def osbot__lambdas__s3__osbot__lambdas__setup(self):
-        osbot_lambdas_bucket_name = self.osbot__lambdas__s3__bucket_name()
+    def lambdas__s3__osbot__lambdas__setup(self):
+        osbot_lambdas_bucket_name = self.lambdas__s3__bucket_name()
         bucket_exists = self.s3().bucket_exists(osbot_lambdas_bucket_name)
         bucket_created = False
 
