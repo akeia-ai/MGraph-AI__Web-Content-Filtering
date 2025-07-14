@@ -1,11 +1,12 @@
-from osbot_aws.Dependencies import load_dependencies
 
 WCF__FAST_API__RETURN_MESSAGE = "Hello from WCF FastApi Lambda!"
 
-def setup_handler():
+def setup_osbot_dependencies():
+    from osbot_aws.Dependencies import load_dependencies
     dependencies = ['fastapi', 'mangum']
     load_dependencies(dependencies)
 
+def setup_handler():
     from fastapi import FastAPI
     from mangum import Mangum
 
@@ -17,6 +18,8 @@ def setup_handler():
 
     handler = Mangum(app)
     return handler
+
+setup_osbot_dependencies()
 
 request__handler = setup_handler()
 

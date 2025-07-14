@@ -29,7 +29,7 @@ class test_wcf__3__fastapi__using_classes(TestCase__FastAPI__Lambda):
         with self.deploy_lambda as _:
             _.add_osbot_aws()
             assert _.deploy() is True
-            #self.test_3__invoke__on_aws()
+            self.test_3__invoke__on_aws()
 
     def test_3__invoke__on_aws(self):
         with self.deploy_lambda as _:
