@@ -1,13 +1,11 @@
 from osbot_aws.deploy.Deploy_Lambda                                                                             import Deploy_Lambda
 from osbot_fast_api.api.Fast_API                                                                                import Fast_API
-from osbot_fast_api.api.Fast_API__Http_Event import Fast_API__Http_Event
-from osbot_fast_api.api.Fast_API__Http_Events import Fast_API__Http_Events
-from osbot_utils.helpers.Guid import Guid
-from osbot_utils.helpers.Random_Guid                                    import Random_Guid
+from osbot_fast_api.api.Fast_API__Http_Event                                                                    import Fast_API__Http_Event
+from osbot_fast_api.api.Fast_API__Http_Events                                                                   import Fast_API__Http_Events
+from osbot_utils.helpers.Random_Guid                                                                            import Random_Guid
 from osbot_utils.type_safe.Type_Safe                                                                            import Type_Safe
-from osbot_utils.utils.Misc import is_guid, list_set
+from osbot_utils.utils.Misc                                                                                     import is_guid, list_set
 from osbot_utils.utils.Objects                                                                                  import base_classes
-
 from mgraph_ai_web_content_filtering.lambdas.dev.wcf__5__fast_api__with_router.WCF__5__Fast_API__With_Router    import WCF__5__Fast_API__With_Router
 from mgraph_ai_web_content_filtering.lambdas.dev.wcf__5__fast_api__with_router.handler                          import run, fast_api_with_router
 from mgraph_ai_web_content_filtering.testing.TestCase__FastAPI__Lambda                                          import TestCase__FastAPI__Lambda
@@ -18,7 +16,7 @@ class test_wcf__5__fast_api__with_router(TestCase__FastAPI__Lambda):
     def setUpClass(cls) -> None:
         cls.handler                               = run
         cls.deploy_lambda                         = Deploy_Lambda(cls.handler)
-        cls.delete_on_exit                        = False
+        cls.delete_on_exit                        = True
         cls.deploy_lambda.package.aws_lambda.name = 'wcf__5__fast_api__with_router'       # we have to do this little fix because the default name is bigger than 64 chars ('mgraph_ai_web_content_filtering_lambdas_dev_fastapi__using_classes_handler')
 
     @classmethod
@@ -50,9 +48,7 @@ class test_wcf__5__fast_api__with_router(TestCase__FastAPI__Lambda):
         assert response__route_1.get('body'      ) == 'this is route 2'
         assert response__route_1.get('statusCode') == 201
 
-    def test_3__invoke__locally__new_route_2__view__captured_event_data(self):
-        from osbot_utils.utils.Dev import pprint
-
+    def test_4__invoke__locally__new_route_2__view__captured_event_data(self):
         request__404         = self.request_payload(path='/AAAAAAA')
         response__404        = run(request__404)
         request__id          = response__404.get('headers').get('fast-api-request-id')
@@ -130,4 +126,23 @@ class test_wcf__5__fast_api__with_router(TestCase__FastAPI__Lambda):
                                         'traces_id'      : traces_id     }
 
 
+    def test_5__deploy(self):
+        with self.deploy_lambda as _:
+            _.add_osbot_aws()
+            _.add_module('osbot_fast_api')
+            assert _.deploy() is True
+            self.test_6__invoke__on_aws()
+
+    def test_6__invoke__on_aws(self):
+        with self.deploy_lambda as _:
+            request__new_route_1  = self.request_payload(path='/wcf-5-routes/route-2')
+            response__new_route_1 = _.invoke(request__new_route_1)
+            fast_api_request_id   =  response__new_route_1.get('headers').get('fast-api-request-id')
+            assert response__new_route_1 == { 'body'            : 'this is route 2'                                   ,
+                                              'headers'         : { 'cache-control'      : 'public, max-age=3600'     ,
+                                                                    'content-length'     : '15'                       ,
+                                                                    'content-type'       : 'text/plain; charset=utf-8',
+                                                                    'fast-api-request-id': fast_api_request_id}       ,
+                                              'isBase64Encoded' : False                                               ,
+                                              'statusCode'      : 201                                                 }
 
