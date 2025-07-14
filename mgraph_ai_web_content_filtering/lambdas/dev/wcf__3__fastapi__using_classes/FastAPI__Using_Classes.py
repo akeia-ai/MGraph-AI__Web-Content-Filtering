@@ -16,7 +16,7 @@ class FastAPI__Using_Classes(Type_Safe):
         app = self.app()
 
         @app.get("/")
-        def read_root():
+        def root_route():
             return {"message": TEST__FASTAPI__ROUTE__RETURN_MESSAGE}
         return self
 

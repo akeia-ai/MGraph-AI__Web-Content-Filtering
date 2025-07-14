@@ -1,4 +1,3 @@
-# todo: move this to helper class
 from osbot_aws.Dependencies import load_dependencies
 dependencies__elastic__serverless = ['fastapi', 'mangum']
 load_dependencies(dependencies__elastic__serverless)

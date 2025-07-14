@@ -5,9 +5,9 @@ load_dependencies(dependencies__elastic__serverless)
 
 from mgraph_ai_web_content_filtering.lambdas.dev.wcf__3__fastapi__using_classes.FastAPI__Using_Classes import FastAPI__Using_Classes
 
-fast_api_using_classes = FastAPI__Using_Classes().setup()
-app     = fast_api_using_classes.app    ()
-handler = fast_api_using_classes.handler()
+fastapi_using_classes = FastAPI__Using_Classes().setup()
+app     = fastapi_using_classes.app    ()
+handler = fastapi_using_classes.handler()
 
 
 def run(event, context=None):
