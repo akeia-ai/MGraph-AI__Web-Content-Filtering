@@ -1,0 +1,1 @@
+# we need this file so that Pycharm allows the execution of tests from this folder from the IDE

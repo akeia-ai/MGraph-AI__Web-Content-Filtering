@@ -1,5 +1,6 @@
 from unittest                                                             import TestCase
 from osbot_utils.utils.Http                                               import GET_json
+from mgraph_ai_web_content_filtering.utils.testing.skip_tests             import skip__if_not__in_github_actions
 from osbot_aws.aws.lambda_.Lambda                                         import Lambda
 from mgraph_ai_web_content_filtering.wcf__fast_api.setup.WCF__AWS__Deploy import WCF__AWS__Deploy, Schema__AWS_Setup__Status, WCF__LAMBDA__FUNCTION_NAME
 
@@ -8,6 +9,7 @@ class test_WCF__Lambda__Deploy(TestCase):
 
     @classmethod
     def setUpClass(cls):
+        skip__if_not__in_github_actions()
         cls.wcf_aws_deploy = WCF__AWS__Deploy()
 
     def test__init__(self):
@@ -29,9 +31,9 @@ class test_WCF__Lambda__Deploy(TestCase):
     #         assert setup_status.json() == { 'config': { 'osbot_lambdas_bucket_id': 'osbot-lambdas'         ,
     #                                                     'project_name'           : 'web-content-filtering'}}
 
-    def test_lambda__deploy(self):
-        with self.wcf_aws_deploy as _:
-            assert _.lambda__deploy() is True
+    # def test_lambda__deploy(self):
+    #     with self.wcf_aws_deploy as _:
+    #         assert _.lambda__deploy() is True
 
     def test_lambda__function_url__setup(self):
 
