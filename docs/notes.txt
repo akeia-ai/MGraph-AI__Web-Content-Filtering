@@ -1,0 +1,48 @@
+# Web Content Filtering Notes
+
+Misc notes about this project
+
+### site's status
+
+#### work from one static page :)
+
+ - https://www.bbc.co.uk/sport
+ - https://www.theguardian.com/uk
+ - https://www.npr.org
+ - https://paulgraham.com                   - simple site , with small content pages like https://paulgraham.com/foundermode.html)
+ - https://www.joelonsoftware.com/
+ - https://lite.cnn.com                     - text version of cnn content
+ - https://text.npr.org                     - text version of npr content
+ - https://theintercept.com/
+
+#### need base change (to original domain)
+
+ - https://docs.diniscruz.ai
+ - https://mvp.myfeeds.ai (images, css and fonts don't load)
+ - https://developer.mozilla.org
+ - https://en.wikipedia.org
+ - https://www.w3schools.com
+ - https://daringfireball.net
+ - https://news.ycombinator.com
+ - https://arxiv.org
+ - https://lwn.net
+ - https://xkcd.com
+ - https://dan.hersam.com
+ - https://sive.rs
+ - https://tldr.sh
+ - https://jsonplaceholder.typicode.com
+ - https://httpbin.org
+ - https://ipleak.net
+ - https://plato.stanford.edu
+ - https://lobste.rs                         - Tech news aggregator (simple design)
+ - https://tildes.net                        - Reddit-like site with minimal design
+ - https://wiby.me                           - Search engine for simple websites
+
+#### sites that need special headers (i.e. direct GET request fails)
+
+ - https://www.theregister.com/ (403)
+ - https://www.reuters.com (401)
+ - https://apnews.com (403)
+ - https://www.troyhunt.com (403)
+ - https://www.france24.com/en (403)
+ - https://devdocs.io (403)

@@ -1,10 +1,11 @@
 from unittest import TestCase
 
 from osbot_utils.utils.Dev import pprint
+from osbot_utils.utils.Misc import list_set
 
-from mgraph_ai_web_content_filtering.wcf__fast_api.core.Html__Transformations import Html__Transformations
+from mgraph_ai_web_content_filtering.wcf__fast_api.core.Html__Transformations import Html__Transformations, \
+    WEBSITE_URL__BBC__SPORT
 
-WEBSITE_URL__BBC__SPORT = "https://www.bbc.co.uk/sport"
 
 class test_Html__Transformations(TestCase):
 
@@ -16,7 +17,15 @@ class test_Html__Transformations(TestCase):
         with self.html_transformations as _:
             assert type(_) is Html__Transformations
 
-    def test_html__get(self):
+    def test_url_to_html(self):
         with self.html_transformations as _:
-            html = _.html__get(WEBSITE_URL__BBC__SPORT)
-            pprint(html)
+            html = _.url_to_html(WEBSITE_URL__BBC__SPORT)
+            assert len(html) > 80,000
+
+    def test_url_to_html_dict(self):
+        with self.html_transformations as _:
+            html_dict = _.url_to_html_dict(WEBSITE_URL__BBC__SPORT)
+            assert type(html_dict) is dict
+
+            assert list_set(html_dict) == ['attrs', 'nodes', 'tag']
+
