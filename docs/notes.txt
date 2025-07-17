@@ -9,11 +9,23 @@ Misc notes about this project
  - https://www.bbc.co.uk/sport
  - https://www.theguardian.com/uk
  - https://www.npr.org
- - https://paulgraham.com                   - simple site , with small content pages like https://paulgraham.com/foundermode.html)
+ - https://paulgraham.com                       - simple site , with small content pages like https://paulgraham.com/foundermode.html)
  - https://www.joelonsoftware.com/
- - https://lite.cnn.com                     - text version of cnn content
- - https://text.npr.org                     - text version of npr content
+ - https://lite.cnn.com                         - text version of cnn content
+ - https://text.npr.org                         - text version of npr content
  - https://theintercept.com/
+ - https://www.bbc.com/news/10628994            - simple bbc page
+ - https://www.bbc.com/news/topics/ce1qrvleleqt - BBC topic: AI
+ - https://readspike.com/                       - nice flat list of lots of news
+ - https://plaintextsports.com/
+ - https://txt.fyi/
+ - https://www.ft.com/
+
+
+#### smaller pages (that also work as one page)
+
+ - https://www.bbc.co.uk/404
+ - https://www.google.co.uk/404
 
 #### need base change (to original domain)
 
@@ -34,9 +46,13 @@ Misc notes about this project
  - https://httpbin.org
  - https://ipleak.net
  - https://plato.stanford.edu
- - https://lobste.rs                         - Tech news aggregator (simple design)
- - https://tildes.net                        - Reddit-like site with minimal design
- - https://wiby.me                           - Search engine for simple websites
+ - https://lobste.rs                        - Tech news aggregator (simple design)
+ - https://tildes.net                       - Reddit-like site with minimal design
+ - https://wiby.me                          - Search engine for simple websites
+ - https://www.google.co.uk
+ - https://timef.com/                       - Collects headlines from various popular news sources
+ - https://duckduckgo.com/
+ - ttps://thecyberboardroom.com             - works for all but one file (the left menu toml which is retrieved from a relative path)
 
 #### sites that need special headers (i.e. direct GET request fails)
 
@@ -46,3 +62,13 @@ Misc notes about this project
  - https://www.troyhunt.com (403)
  - https://www.france24.com/en (403)
  - https://devdocs.io (403)
+
+
+#### don't work and hang
+
+ - https://www.cbc.ca/lite/news?sort=latest  # todo: figure out why
+
+
+
+ ### lists of sites
+  - https://github.com/localjo/awesome-text-only-news?

@@ -4,7 +4,7 @@ from osbot_utils.utils.Dev import pprint
 from osbot_utils.utils.Misc import list_set
 
 from mgraph_ai_web_content_filtering.wcf__fast_api.core.Html__Transformations import Html__Transformations, \
-    WEBSITE_URL__BBC__SPORT
+    WEBSITE_URL__DEFAULT_SITE
 
 
 class test_Html__Transformations(TestCase):
@@ -19,12 +19,13 @@ class test_Html__Transformations(TestCase):
 
     def test_url_to_html(self):
         with self.html_transformations as _:
-            html = _.url_to_html(WEBSITE_URL__BBC__SPORT)
-            assert len(html) > 80,000
+            html = _.url_to_html(WEBSITE_URL__DEFAULT_SITE)
+            assert len(html) > 10000
+
 
     def test_url_to_html_dict(self):
         with self.html_transformations as _:
-            html_dict = _.url_to_html_dict(WEBSITE_URL__BBC__SPORT)
+            html_dict = _.url_to_html_dict(WEBSITE_URL__DEFAULT_SITE)
             assert type(html_dict) is dict
 
             assert list_set(html_dict) == ['attrs', 'nodes', 'tag']

@@ -1,20 +1,14 @@
-from enum import Enum
-
+import requests
 from osbot_utils.decorators.methods.cache_on_self       import cache_on_self
 from osbot_utils.helpers.html.Html__To__Html_Dict       import Html__To__Html_Dict
 from osbot_utils.helpers.html.Html__To__Html_Document import Html__To__Html_Document
 from osbot_utils.helpers.safe_str.Safe_Str__File__Name  import Safe_Str__File__Name
 from osbot_utils.type_safe.Type_Safe                    import Type_Safe
 from osbot_utils.utils.Files                            import path_combine, file_not_exists, file_save, file_contents, folder_create, current_temp_folder
-from osbot_utils.utils.Http                             import GET
 
-# class Website_Url__For_Sites_With__One_Page_Support(Enum):
-#     bbc__sport        : str = "https://www.bbc.co.uk/sport"
-#     paul_graham__site : str = "https://paulgraham.com"
-#     npr__text_version : str = "https://text.npr.org"
 
-WEBSITE_URL__BBC__SPORT = "https://www.bbc.co.uk/sport"
-FOLDER__TEMP_DATA       = 'WCF__Temp_Data'
+WEBSITE_URL__DEFAULT_SITE = "https://www.bbc.co.uk/404"
+FOLDER__TEMP_DATA         = 'WCF__Temp_Data'
 
 class Html__Transformations(Type_Safe):
 
@@ -35,7 +29,8 @@ class Html__Transformations(Type_Safe):
     def url_to_html(self, url):
         file_path = self.file_path__from_url(url, '.html')
         if file_not_exists(file_path):
-            html = GET(url)
+            response = requests.get(url)                            # use requests here since it handles natively sites like google (which uses a different encoding)
+            html     = response.text
             file_save(html, path=file_path)
         else:
             html = file_contents(file_path)
