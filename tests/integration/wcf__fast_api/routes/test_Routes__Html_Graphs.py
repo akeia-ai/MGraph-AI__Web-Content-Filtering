@@ -9,5 +9,6 @@ class test_Routes__Html_Graphs(TestCase):
         cls.client        = cls.wcf_test_data.wcf__fast_api__client
 
     def test__html_graphs__html_to_html_dict(self):
-        response = self.client.get(f'/{ROUTES__TAG__HTML_GRAPHS}/url-to-html')
+        url = "https://text.npr.org"
+        response = self.client.get(f'/{ROUTES__TAG__HTML_GRAPHS}/url-to-html?url={url}')
         assert response.status_code == 200
