@@ -1,13 +1,15 @@
-from mgraph_ai_web_content_filtering.lambdas.wcf__handler   import run
-from osbot_aws.deploy.Deploy_Lambda                         import Deploy_Lambda
-from osbot_aws.aws.lambda_.Lambda                           import Lambda
-from osbot_aws.AWS_Config                                   import AWS_Config
-from osbot_aws.apis.test_helpers.Temp_Aws_Roles             import Temp_Aws_Roles
-from osbot_aws.aws.cloud_front.Cloud_Front                  import Cloud_Front
-from osbot_aws.aws.s3.S3                                    import S3
-from osbot_utils.decorators.methods.cache_on_self           import cache_on_self
-from osbot_utils.helpers.Safe_Id                            import Safe_Id
-from osbot_utils.type_safe.Type_Safe                        import Type_Safe
+from mgraph_ai_web_content_filtering.lambdas.wcf__handler                   import run
+from mgraph_ai_web_content_filtering.wcf__fast_api.setup.WCF__Lambda__Setup import DEPENDENCIES__LAMBDAS__WCF
+from osbot_aws.deploy.Deploy_Lambda                                         import Deploy_Lambda
+from osbot_aws.aws.lambda_.Lambda                                           import Lambda
+from osbot_aws.AWS_Config                                                   import AWS_Config
+from osbot_aws.apis.test_helpers.Temp_Aws_Roles                             import Temp_Aws_Roles
+from osbot_aws.aws.cloud_front.Cloud_Front                                  import Cloud_Front
+from osbot_aws.aws.s3.S3                                                    import S3
+from osbot_aws.helpers.Lambda_Upload_Package                                import Lambda_Upload_Package
+from osbot_utils.decorators.methods.cache_on_self                           import cache_on_self
+from osbot_utils.helpers.Safe_Id                                            import Safe_Id
+from osbot_utils.type_safe.Type_Safe                                        import Type_Safe
 
 WCF__LAMBDA__FUNCTION_NAME = 'mgraph_ai_web_content_filtering_lambdas_wcf__handler'
 WCF__DNS_NAME              = 'web-content-filtering.mgraph.ai'
@@ -71,6 +73,12 @@ class WCF__AWS__Deploy(Type_Safe):
                       bucket__exists = bucket_exists  )
         return result
 
+    def s3__upload__lambda_dependencies(self):
+        packages_to_install = DEPENDENCIES__LAMBDAS__WCF
+        lambda_upload = Lambda_Upload_Package()
+        result = lambda_upload.upload_to_s3(packages_to_install)
+        return result
+
     def lambda__deploy(self):
         handler = run                                                   # todo: add support for dev, qa and prod versions of this lambda
         with Deploy_Lambda(handler=handler) as _:
@@ -109,11 +117,3 @@ class WCF__AWS__Deploy(Type_Safe):
         result = dict(bucket_created =  bucket_created,               # this will only be true the one time the bucket is created
                       bucket__exists = bucket_exists  )
         return result
-
-    # todo: convert to method in this class (and see if current code checks if dependencies already exist before installing them locally)
-    # def test_setup_lambda_fast_api(self):
-    #     packages_to_install = ['fastapi', 'mangum']
-    #     from osbot_aws.helpers.Lambda_Upload_Package import Lambda_Upload_Package
-    #     lambda_upload = Lambda_Upload_Package()
-    #     result = lambda_upload.upload_to_s3(packages_to_install)
-    #     pprint(result)

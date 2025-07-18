@@ -3,6 +3,7 @@ osbot-utils
 osbot-aws
 osbot-fast-api
 mangum
+requests
 
 # for pytest
 pytest

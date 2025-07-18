@@ -1,7 +1,6 @@
 from osbot_fast_api.api.Fast_API_Routes                                         import Fast_API_Routes
 from starlette.responses                                                        import HTMLResponse
-from mgraph_ai_web_content_filtering.wcf__fast_api.core.Html__Transformations import Html__Transformations, \
-    WEBSITE_URL__DEFAULT_SITE
+from mgraph_ai_web_content_filtering.wcf__fast_api.core.Html__Transformations   import Html__Transformations, WEBSITE_URL__DEFAULT_SITE
 
 ROUTES__TAG__HTML_GRAPHS = "html-graphs"
 

@@ -1,8 +1,10 @@
+import pytest
+
 from unittest                                                             import TestCase
 from osbot_utils.utils.Http                                               import GET_json
 from mgraph_ai_web_content_filtering.utils.testing.skip_tests             import skip__if_not__in_github_actions
 from osbot_aws.aws.lambda_.Lambda                                         import Lambda
-from mgraph_ai_web_content_filtering.wcf__fast_api.setup.WCF__AWS__Deploy import WCF__AWS__Deploy, Schema__AWS_Setup__Status, WCF__LAMBDA__FUNCTION_NAME
+from mgraph_ai_web_content_filtering.wcf__fast_api.setup.WCF__AWS__Deploy import WCF__AWS__Deploy, WCF__LAMBDA__FUNCTION_NAME
 
 
 class test_WCF__Lambda__Deploy(TestCase):
@@ -72,3 +74,8 @@ class test_WCF__Lambda__Deploy(TestCase):
         with self.wcf_aws_deploy as _:
             assert _.lambdas__s3__osbot__lambdas__setup() == {'bucket__exists': True ,
                                                                       'bucket_created': False}
+
+    @pytest.mark.skip("only needed when dependencies need to be updated") # todo: move this logic to a setup workflow , which detects if the current versions are already deployed
+    def test_s3__upload__lambda_dependencies(self):
+        with self.wcf_aws_deploy as _:
+            _.s3__upload__lambda_dependencies()

@@ -1,7 +1,7 @@
 from osbot_utils.decorators.methods.cache_on_self  import cache_on_self
 from osbot_utils.type_safe.Type_Safe               import Type_Safe
 
-DEPENDENCIES__FAST_API = ['fastapi', 'mangum']
+DEPENDENCIES__LAMBDAS__WCF = ['fastapi', 'mangum', 'requests']                   # see if this should be on WCF__AWS__Deploy
 
 class WCF__Lambda__Setup(Type_Safe):
 
@@ -22,4 +22,4 @@ class WCF__Lambda__Setup(Type_Safe):
 
     def load_lambda_dependencies(self):
         from osbot_aws.Dependencies import load_dependencies
-        load_dependencies(DEPENDENCIES__FAST_API)
+        load_dependencies(DEPENDENCIES__LAMBDAS__WCF)

@@ -207,3 +207,4 @@ marimo/_lsp/
 __marimo__/
 /tests/_lambda_dependencies/
 _data
+_lambda_dependencies
