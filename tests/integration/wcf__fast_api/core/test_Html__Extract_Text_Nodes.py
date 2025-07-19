@@ -1,14 +1,14 @@
 from unittest                                                                       import TestCase
 from osbot_utils.utils.Dev                                                          import pprint
-from mgraph_ai_web_content_filtering.wcf__fast_api.core.HTML__Extract_Text_Nodes    import HTML__Extract_Text_Nodes
+from mgraph_ai_web_content_filtering.wcf__fast_api.core.Html__Extract_Text_Nodes    import Html__Extract_Text_Nodes
 from mgraph_ai_web_content_filtering.wcf__fast_api.core.Html__Transformations       import WEBSITE_URL__DEFAULT_SITE
 
 
-class test_HTML__Extract_Text_Nodes(TestCase):
+class test_Html__Extract_Text_Nodes(TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.html_extract_text_nodes = HTML__Extract_Text_Nodes()
+        cls.html_extract_text_nodes = Html__Extract_Text_Nodes()
 
     def test_extract(self):
         #url = 'https://www.bbc.com/sport/football/articles/cvg8j1l0751o'

@@ -15,14 +15,25 @@ class test_Html__Transformations(TestCase):
 
     def test_url_to_html(self):
         with self.html_transformations as _:
-            html = _.url_to_html(WEBSITE_URL__DEFAULT_SITE)
+            html = _.url__to__html(WEBSITE_URL__DEFAULT_SITE)
             assert len(html) > 10000
 
 
     def test_url_to_html_dict(self):
         with self.html_transformations as _:
-            html_dict = _.url_to_html_dict(WEBSITE_URL__DEFAULT_SITE)
+            html_dict = _.url__to__html_dict(WEBSITE_URL__DEFAULT_SITE)
             assert type(html_dict) is dict
 
             assert list_set(html_dict) == ['attrs', 'nodes', 'tag']
+
+    def test_url__to__html_dict__to__html(self):
+        with self.html_transformations as _:
+            html_roundtrip = _.url__to__html_dict__to__html(WEBSITE_URL__DEFAULT_SITE)
+            print(html_roundtrip)
+
+    def test_url__to__html_dict__to__lines(self):
+        with self.html_transformations as _:
+            lines = _.url__to__html_dict__to__lines(WEBSITE_URL__DEFAULT_SITE)
+            assert '└── TEXT: BBC - 404: Not Found' in lines
+
 
