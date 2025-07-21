@@ -1,7 +1,7 @@
-from osbot_utils.decorators.methods.cache_on_self  import cache_on_self
-from osbot_utils.type_safe.Type_Safe               import Type_Safe
+from osbot_utils.decorators.methods.cache_on_self                                   import cache_on_self
+from osbot_utils.type_safe.Type_Safe                                                import Type_Safe
+from mgraph_ai_web_content_filtering.wcf__fast_api.setup.WCF__Lambda__Create_Layer  import DEPENDENCIES__LAMBDAS__WCF
 
-DEPENDENCIES__LAMBDAS__WCF = ['fastapi', 'mangum', 'requests']                   # see if this should be on WCF__AWS__Deploy
 
 class WCF__Lambda__Setup(Type_Safe):
 
