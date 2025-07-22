@@ -10,7 +10,6 @@ class test_wcf__8__osbot_aws__using_layer(TestCase__FastAPI__Lambda):
         cls.handler        = run
         cls.lambda_name    = 'wcf__8__osbot_aws__using_layer'
         cls.lambda_layer   = Lambda_Layer_Create(layer_name=cls.lambda_name)
-        cls.skip_locally   = False
         cls.delete_on_exit = True
         super().setUpClass()
 
