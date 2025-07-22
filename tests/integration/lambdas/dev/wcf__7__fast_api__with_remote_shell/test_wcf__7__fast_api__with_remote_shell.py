@@ -6,15 +6,13 @@ from mgraph_ai_web_content_filtering.lambdas.dev.wcf__7__fast_api__with_remote_s
 
 class test_wcf__7__fast_api__with_remote_shell(TestCase__FastAPI__Lambda):
 
-
     @classmethod
     def setUpClass(cls) -> None:
-        cls.skip_locally = False
         cls.handler      = run
+        cls.lambda_name = 'wcf__7__fast_api__with_remote_shell'
         super().setUpClass()
-        cls.delete_on_exit = True
-        cls.deploy_lambda.package.aws_lambda.name = 'wcf__7__fast_api__with_remote_shell'       # we have to do this little fix because the default name is bigger than 64 chars
         cls.auth_key       = random_guid()
+
         # load_dotenv()
         # cls.auth_key = getenv(SHELL__ENV_VAR__AUTH_KEY)
         # assert cls.auth_key is not None , f"The {SHELL__ENV_VAR__AUTH_KEY} env variable needs to be set on a local .env var "

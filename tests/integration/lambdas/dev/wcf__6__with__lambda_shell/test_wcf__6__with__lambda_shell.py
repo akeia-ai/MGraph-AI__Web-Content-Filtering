@@ -13,8 +13,8 @@ class test_wcf__6__with__lambda_shell(TestCase):
     @classmethod
     def setUpClass(cls):
         cls.auth_key                              = random_guid()
-        cls.deploy_lambda                         = Deploy_Lambda(run)
-        cls.deploy_lambda.package.aws_lambda.name = 'wcf__6__with__lambda_shell'
+        cls.lambda_name                           = 'wcf__6__with__lambda_shell'
+        cls.deploy_lambda                         = Deploy_Lambda(run, lambda_name=cls.lambda_name)
         cls.lambda_function                       = cls.deploy_lambda.lambda_function()
         cls.shell_client                          = Shell_Client(aws_lambda=cls.lambda_function)
         set_env(SHELL__ENV_VAR__AUTH_KEY, cls.auth_key)
