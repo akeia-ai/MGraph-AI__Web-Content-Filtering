@@ -1,6 +1,5 @@
 from unittest import TestCase
-
-from fastapi import FastAPI
+from fastapi  import FastAPI
 
 from mgraph_ai_web_content_filtering.lambdas.dev.wcf__5__fast_api__with_router.WCF__5__Fast_API__With_Router import \
     WCF__5__Fast_API__With_Router

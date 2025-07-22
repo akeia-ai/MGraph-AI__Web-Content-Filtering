@@ -1,7 +1,5 @@
 import json
-
 from mgraph_ai_web_content_filtering.utils.testing.TestCase__FastAPI__Lambda                             import TestCase__FastAPI__Lambda
-from osbot_aws.deploy.Deploy_Lambda                                                                      import Deploy_Lambda
 from osbot_fast_api.api.Fast_API                                                                         import Fast_API
 from osbot_fast_api.utils.Version                                                                        import version__osbot_fast_api
 from osbot_utils.type_safe.Type_Safe                                                                     import Type_Safe
@@ -14,13 +12,9 @@ class test_wcf__4__fast_api__using_classes(TestCase__FastAPI__Lambda):
     @classmethod
     def setUpClass(cls) -> None:
         cls.handler = run
+        cls.lambda_name = 'wcf__4__fast_api__using_classes'
         super().setUpClass()
-        cls.deploy_lambda.package.aws_lambda.name = 'wcf__4__fast_api__using_classes'       # we have to do this little fix because the default name is bigger than 64 chars ('mgraph_ai_web_content_filtering_lambdas_dev_fastapi__using_classes_handler')
 
-    @classmethod
-    def tearDownClass(cls) -> None:
-        if cls.delete_on_exit:
-            assert cls.deploy_lambda.delete() is True
 
     def setUp(self):
         self.payload  = self.request_payload  ()

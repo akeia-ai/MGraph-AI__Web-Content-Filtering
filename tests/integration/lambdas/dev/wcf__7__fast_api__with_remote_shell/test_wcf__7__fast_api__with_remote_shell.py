@@ -1,6 +1,6 @@
 import json
-from osbot_fast_api.utils.http_shell.Http_Shell__Server import ENV__HTTP_SHELL_AUTH_KEY
-from osbot_utils.utils.Misc import random_guid
+from osbot_fast_api.utils.http_shell.Http_Shell__Server                                         import ENV__HTTP_SHELL_AUTH_KEY
+from osbot_utils.utils.Misc                                                                     import random_guid
 from mgraph_ai_web_content_filtering.utils.testing.TestCase__FastAPI__Lambda                    import TestCase__FastAPI__Lambda
 from mgraph_ai_web_content_filtering.lambdas.dev.wcf__7__fast_api__with_remote_shell.handler    import run
 

@@ -9,8 +9,8 @@ class test_wcf__3__fastapi__using_classes(TestCase__FastAPI__Lambda):
     @classmethod
     def setUpClass(cls):
         cls.handler = run
+        cls.lambda_name = 'wcf__3__fastapi__using_classes'
         super().setUpClass()
-        cls.deploy_lambda.package.aws_lambda.name = 'wcf__fastapi__using_classes'       # we have to do this little fix because the default name is bigger than 64 chars ('mgraph_ai_web_content_filtering_lambdas_dev_fastapi__using_classes_handler')
 
     def setUp(self):
         self.payload  = self.request_payload  ()

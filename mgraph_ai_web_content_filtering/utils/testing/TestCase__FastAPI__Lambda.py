@@ -9,14 +9,15 @@ TEST__FASTAPI__ROUTE__RETURN_MESSAGE = 'This is from fast api'
 
 class TestCase__FastAPI__Lambda(TestCase):
     handler       : types.MethodType
-    delete_on_exit: bool = False
+    delete_on_exit: bool = True
+    lambda_name   : str  = None
     skip_locally  : bool = True
 
     @classmethod
     def setUpClass(cls) -> None:
         if cls.skip_locally:
             skip__if_not__in_github_actions()
-        cls.deploy_lambda                         = Deploy_Lambda(cls.handler)          # this needs to be setup by the class that uses this helper class
+        cls.deploy_lambda = Deploy_Lambda(cls.handler, lambda_name=cls.lambda_name)
 
     @classmethod
     def tearDownClass(cls) -> None:

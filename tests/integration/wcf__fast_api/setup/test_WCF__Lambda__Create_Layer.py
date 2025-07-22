@@ -1,8 +1,6 @@
 from unittest                                                                       import TestCase
-from osbot_utils.utils.Dev                                                          import pprint
 from osbot_utils.utils.Files                                                        import path_combine, current_temp_folder
-from osbot_utils.utils.Misc import list_set
-
+from osbot_utils.utils.Misc                                                         import list_set
 from osbot_aws.helpers.Lambda_Layer_Create                                          import Lambda_Layer_Create
 from osbot_utils.helpers.Safe_Id                                                    import Safe_Id
 from mgraph_ai_web_content_filtering.wcf__fast_api.setup.WCF__Lambda__Create_Layer  import WCF__Lambda__Create_Layer
@@ -30,7 +28,7 @@ class test_WCF__Lambda__Create_Layer(TestCase):
 
             result = _.create__in__local_temp_folder()
             assert list_set(result) == []
-            assert list_set(_.lambda_layer_create.installed_packages()) == ['fastapi', 'mangum', 'requests']
+            assert list_set(_.lambda_layer_create.installed_packages()) == ['fastapi', 'mangum', 'osbot-aws', 'requests']
 
     def test_exists(self):
         with self.wcf_lambda_create_layer as _:
