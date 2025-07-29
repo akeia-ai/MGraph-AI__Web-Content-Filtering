@@ -2,7 +2,7 @@ from unittest import TestCase
 from osbot_utils.helpers.duration.decorators.print_duration             import print_duration
 from osbot_aws.AWS_Config                                               import AWS_Config
 from mgraph_ai_web_content_filtering.wcf__fast_api.llms.WCF__LLM__Cache import WCF__LLM__Cache
-from tests.integration.wcf__objs_for_tests                              import wcf__assert_local_stack
+from tests.unit.wcf__objs_for_tests                                     import wcf__assert_local_stack
 
 
 class test_WCF__LLM__Cache(TestCase):

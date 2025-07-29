@@ -9,7 +9,7 @@ from osbot_utils.utils.Env                                                      
 from mgraph_ai_web_content_filtering.wcf__fast_api.llms.LLM__Prompt__Extract_Rating             import LLM__Prompt__Extract_Rating, SYSTEM_PROMPT__EXTRACT_RATING
 from mgraph_ai_web_content_filtering.wcf__fast_api.llms.Schema__Text__Rating                    import Schema__Text__Rating, Schema__Text__Ratings
 from mgraph_ai_web_content_filtering.wcf__fast_api.llms.WCF__LLM__Execute_Request               import WCF__LLM__Execute_Request
-from tests.integration.wcf__objs_for_tests import wcf__assert_local_stack
+from tests.unit.wcf__objs_for_tests                                                             import wcf__assert_local_stack
 
 TEST__TEMP__ROOT_FOLDER = '/tmp/_osbot_utils/cache__test_LLM_Request__Execute'
 
