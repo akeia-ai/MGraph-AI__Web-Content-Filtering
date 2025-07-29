@@ -1,4 +1,6 @@
 from unittest                                                                       import TestCase
+
+from osbot_utils.utils.Dev import pprint
 from osbot_utils.utils.Files                                                        import path_combine, current_temp_folder
 from osbot_utils.utils.Misc                                                         import list_set
 from osbot_aws.helpers.Lambda_Layer_Create                                          import Lambda_Layer_Create
@@ -22,14 +24,17 @@ class test_WCF__Lambda__Create_Layer(TestCase):
             assert _.path_layer_folder()          == path_combine(current_temp_folder(), '_lambda_dependencies/wcf-layer')
             assert _.has_package_installed('abc') is False
 
-    def test_create__in__local_temp_folder(self):
+    def test_create_layer(self):
         with self.wcf_lambda_create_layer as _:
-            #_.lambda_layer_create.delete_local_layer_folder()
+            #_.lambda_layer_create.delete_local_layer_folder()              # do this to retrigger the local installation of packages
+            skip_if_exists     = False                                      # set to False to force recreation of layer
+            result             = _.create_layer(skip_if_exists=skip_if_exists)
+            installed_packages = _.lambda_layer_create.installed_packages()
+            layer_arn          = _.layer_arn()
+            exists             = _.exists()
 
-            result = _.create__in__local_temp_folder()
-            assert list_set(result) == []
-            assert list_set(_.lambda_layer_create.installed_packages()) == ['fastapi', 'mangum', 'osbot-aws', 'requests']
-
-    def test_exists(self):
-        with self.wcf_lambda_create_layer as _:
-            assert _.exists() is False
+            assert layer_arn.startswith('arn:aws:lambda:')
+            assert result == layer_arn
+            assert exists is True
+            if installed_packages:
+                assert list_set(installed_packages) == [ 'mangum', 'osbot-aws', 'osbot-fast-api', 'requests']

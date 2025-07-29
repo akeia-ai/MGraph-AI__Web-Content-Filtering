@@ -22,5 +22,4 @@ class test_Routes__Html_Graphs(TestCase):
         with self.routes_html_graphs as _:
             text_nodes = _.url_to_text_nodes()
             assert text_nodes['1e314df0e1'] == { 'original_text': '\n   BBC - 404: Not Found\n    ',
-                                                 'rating'       : None,
                                                  'tag'          : 'title' }

@@ -1,4 +1,3 @@
-from os                                                                             import getenv
 from unittest                                                                       import TestCase
 from osbot_utils.utils.Misc                                                         import random_guid
 from osbot_aws.apis.shell.Shell_Client                                              import Shell_Client

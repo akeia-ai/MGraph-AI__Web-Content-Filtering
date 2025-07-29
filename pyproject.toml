@@ -9,13 +9,10 @@ homepage    = "https://github.com/the-cyber-boardroom/MGraph-AI__Web-Content-Fil
 repository  = "https://github.com/the-cyber-boardroom/MGraph-AI__Web-Content-Filtering"
 
 [tool.poetry.dependencies]
-python            = "^3.12"
-osbot-utils       = "*"
-osbot-aws         = "*"
-osbot-fast-api    = "*"
-memory-fs         = "*"
-mgraph-db         = "*"
-mangum            = "*"
+python                     = "^3.12"
+osbot-fast-api-serverless  = "*"
+memory-fs                  = "*"
+mgraph-db                  = "*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

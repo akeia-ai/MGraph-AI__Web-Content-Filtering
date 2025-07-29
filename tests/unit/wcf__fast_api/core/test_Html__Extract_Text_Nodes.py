@@ -17,6 +17,5 @@ class test_Html__Extract_Text_Nodes(TestCase):
             _.url         = url
             text_elements = _.extract()
             assert text_elements['1e314df0e1'] ==  { 'original_text': '\n   BBC - 404: Not Found\n    ',
-                                                      'rating': None,
                                                       'tag': 'title'}
             assert _.captures == 23

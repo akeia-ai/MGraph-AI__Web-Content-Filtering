@@ -20,7 +20,7 @@ class Html__Extract_Text_Nodes(Type_Safe):
         hash = str_md5(text)[:self.hash_size]
         self.text_elements__raw[hash] = text
         self.text_elements[hash] = dict(original_text = text,
-                                        rating        = None,
+                                        #rating        = None,
                                         tag           = tag )
         self.captures += 1
         return hash
