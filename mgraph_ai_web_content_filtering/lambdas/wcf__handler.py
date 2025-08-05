@@ -14,6 +14,14 @@ clear_osbot_modules()
 
 from mgraph_ai_web_content_filtering.wcf__fast_api.WCF__Fast_API import WCF__Fast_API
 
+# def run_using_localstack():
+#     from osbot_local_stack.local_stack.Local_Stack       import Local_Stack
+#     from osbot_aws.testing.Temp__Random__AWS_Credentials import Temp_AWS_Credentials
+#     Temp_AWS_Credentials().with_localstack_credentials()
+#     local_stack = Local_Stack().activate()
+#
+# run_using_localstack()
+
 with WCF__Fast_API() as _:
     _.setup()
     handler = _.handler()

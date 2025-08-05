@@ -40,12 +40,43 @@ class Routes__Html_Graphs(Fast_API_Routes):
         html_extract_text_nodes = Html__Extract_Text_Nodes(url=url)
         return html_extract_text_nodes.extract()
 
+    def url_to_html_hashes(self, url = WEBSITE_URL__DEFAULT_SITE):
+        with Html__Extract_Text_Nodes(url=url) as _:
+            html = _.create_html_with_hashes_as_text()
+            return HTMLResponse(content=html, status_code=200)
+
+    def url_to_html_xxx(self, url=WEBSITE_URL__DEFAULT_SITE):
+        with Html__Extract_Text_Nodes(url=url) as _:
+            html = _.create_html_with_xxx_as_text()
+            return HTMLResponse(content=html, status_code=200)
+
+    def url_to_html_ratings(self, url=WEBSITE_URL__DEFAULT_SITE):
+        with Html__Extract_Text_Nodes(url=url) as _:
+            html = _.create_html_with_ratings()
+            return HTMLResponse(content=html, status_code=200)
+
+    def url_to_html_topics(self, url=WEBSITE_URL__DEFAULT_SITE):
+        with Html__Extract_Text_Nodes(url=url) as _:
+            html = _.create_html_with_topics()
+            return HTMLResponse(content=html, status_code=200)
+
+
     def url_to_ratings(self, url         : str                                = WEBSITE_URL__DEFAULT_SITE ,
                              model_to_use: Schema__WCF__LLM__Supported_Models = LLM__MODEL_TO_USE__DEFAULT
                         ) -> dict:
         text_nodes = self.url_to_text_nodes(url)
         ratings    = self.llm_execute.create_ratings(text_nodes, model_to_use= model_to_use)
         return ratings
+
+    def url_to_html_min_rating(self, url=WEBSITE_URL__DEFAULT_SITE, rating: float=0.3):
+        with Html__Extract_Text_Nodes(url=url) as _:
+            html = _.create_html_with_min_ratings(min_rating=rating)
+            return HTMLResponse(content=html, status_code=200)
+
+    def url_to_html_max_rating(self, url=WEBSITE_URL__DEFAULT_SITE, rating: float=0.3):
+        with Html__Extract_Text_Nodes(url=url) as _:
+            html = _.create_html_with_max_ratings(max_rating=rating)
+            return HTMLResponse(content=html, status_code=200)
 
     def setup_routes(self):
         self.add_route_get(self.url_to_html             )
@@ -54,4 +85,10 @@ class Routes__Html_Graphs(Fast_API_Routes):
         self.add_route_get(self.url_to_html_document    )
         self.add_route_get(self.url_to_lines            )
         self.add_route_get(self.url_to_text_nodes       )
+        self.add_route_get(self.url_to_html_hashes      )
+        self.add_route_get(self.url_to_html_xxx         )
+        self.add_route_get(self.url_to_html_ratings     )
+        self.add_route_get(self.url_to_html_topics      )
+        self.add_route_get(self.url_to_html_min_rating  )
+        self.add_route_get(self.url_to_html_max_rating  )
         self.add_route_get(self.url_to_ratings          )
