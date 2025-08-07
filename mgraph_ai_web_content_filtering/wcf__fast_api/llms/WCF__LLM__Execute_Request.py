@@ -8,7 +8,8 @@ from mgraph_ai_web_content_filtering.wcf__fast_api.llms.API__LLM__Open_Router   
 from mgraph_ai_web_content_filtering.wcf__fast_api.llms.LLM__Prompt__Extract_Rating        import LLM__Prompt__Extract_Rating
 from mgraph_ai_web_content_filtering.wcf__fast_api.llms.WCF__LLM__Cache                    import WCF__LLM__Cache
 
-LLM__MODEL_TO_USE__DEFAULT = Schema__WCF__LLM__Supported_Models.Mistral_AI__Mistral_Small__Free
+#LLM__MODEL_TO_USE__DEFAULT = Schema__WCF__LLM__Supported_Models.Mistral_AI__Mistral_Small__Free
+LLM__MODEL_TO_USE__DEFAULT = Schema__WCF__LLM__Supported_Models.Open_AI__GPT_5__Nano
 
 class WCF__LLM__Execute_Request(Type_Safe):
     virtual_storage: WCF__LLM__Cache = None
