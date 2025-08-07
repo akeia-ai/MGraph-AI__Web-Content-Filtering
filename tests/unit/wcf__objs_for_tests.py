@@ -27,6 +27,7 @@ def wcf_tests__setup_fast_api():
             _.wcf__fast_api         = WCF__Fast_API().setup()
             _.wcf__fast_api__app    = _.wcf__fast_api.app()
             _.wcf__fast_api__client = _.wcf__fast_api.client()
+            _.api__not_setup        = False
     return wcf_test_data
 
 def wcf__assert_local_stack():

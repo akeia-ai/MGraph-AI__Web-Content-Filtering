@@ -5,8 +5,20 @@ from mgraph_ai_web_content_filtering.wcf__fast_api.core.Html__Transformations   
 from mgraph_ai_web_content_filtering.wcf__fast_api.llms.Schema__WCF__LLM__Supported_Models  import Schema__WCF__LLM__Supported_Models
 from mgraph_ai_web_content_filtering.wcf__fast_api.llms.WCF__LLM__Execute_Request           import WCF__LLM__Execute_Request, LLM__MODEL_TO_USE__DEFAULT
 
-ROUTES__TAG__HTML_GRAPHS = "html-graphs"
-
+ROUTES__TAG__HTML_GRAPHS  = "html-graphs"
+ROUTES_PATHS__HTML_GRAPHS = [f'/{ROUTES__TAG__HTML_GRAPHS}/url-to-html'             ,
+                             f'/{ROUTES__TAG__HTML_GRAPHS}/url-to-html-dict'        ,
+                             f'/{ROUTES__TAG__HTML_GRAPHS}/url-to-html-dict-to-html',
+                             f'/{ROUTES__TAG__HTML_GRAPHS}/url-to-html-document'    ,
+                             f'/{ROUTES__TAG__HTML_GRAPHS}/url-to-html-hashes'      ,
+                             f'/{ROUTES__TAG__HTML_GRAPHS}/url-to-html-max-rating'  ,
+                             f'/{ROUTES__TAG__HTML_GRAPHS}/url-to-html-min-rating'  ,
+                             f'/{ROUTES__TAG__HTML_GRAPHS}/url-to-html-ratings'     ,
+                             f'/{ROUTES__TAG__HTML_GRAPHS}/url-to-html-topics'      ,
+                             f'/{ROUTES__TAG__HTML_GRAPHS}/url-to-html-xxx'         ,
+                             f'/{ROUTES__TAG__HTML_GRAPHS}/url-to-lines'            ,
+                             f'/{ROUTES__TAG__HTML_GRAPHS}/url-to-ratings'          ,
+                             f'/{ROUTES__TAG__HTML_GRAPHS}/url-to-text-nodes'       ]
 
 class Routes__Html_Graphs(Fast_API_Routes):
     tag                  : str                       = ROUTES__TAG__HTML_GRAPHS

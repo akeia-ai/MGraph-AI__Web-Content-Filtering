@@ -1,6 +1,6 @@
 import pytest
 from unittest                                                                   import TestCase
-from mgraph_ai_web_content_filtering.utils.deploy.Deploy__Web_Content_Filtering import Deploy__Web_Content_Filtering, LAMBDA_DEPENDENCIES__WEB_CONTENT_FILTERING
+from osbot_aws.AWS_Config                                                       import AWS_Config
 from osbot_utils.utils.Misc                                                     import list_set
 from osbot_fast_api_serverless.utils.Version                                    import version__osbot_fast_api_serverless
 from osbot_fast_api_serverless.deploy.Deploy__Serverless__Fast_API              import DEFAULT__ERROR_MESSAGE__WHEN_FAST_API_IS_OK
@@ -8,11 +8,12 @@ from osbot_fast_api_serverless.deploy.Deploy__Serverless__Fast_API              
 class test_Deploy__Web_Content_Filtering__to__dev(TestCase):
     @classmethod
     def setUpClass(cls):
+        if AWS_Config().aws_configured() is False:
+            pytest.skip("this test needs valid AWS credentials")
+
+        from mgraph_ai_web_content_filtering.utils.deploy.Deploy__Web_Content_Filtering import Deploy__Web_Content_Filtering, LAMBDA_DEPENDENCIES__WEB_CONTENT_FILTERING
         cls.deploy_fast_api__dev  = Deploy__Web_Content_Filtering(stage = 'dev')
 
-        with cls.deploy_fast_api__dev as _:
-            if _.aws_config.aws_configured() is False:
-                pytest.skip("this test needs valid AWS credentials")
 
     def test_1__check_stages(self):
         assert self.deploy_fast_api__dev .stage == 'dev'
