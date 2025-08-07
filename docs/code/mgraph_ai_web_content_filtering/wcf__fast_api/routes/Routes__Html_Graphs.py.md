@@ -8,7 +8,7 @@
 ## 🏗️ API Architecture
 
 ```mermaid
-graph TB
+graph LR
     subgraph "API Gateway"
         CLIENT[Client Request]
         FAST[FastAPI Router]
@@ -18,23 +18,23 @@ graph TB
         ROUTES[Routes__Html_Graphs]
         
         subgraph "Transformation Endpoints"
-            E1[/url-to-html]
-            E2[/url-to-html-dict]
-            E3[/url-to-html-document]
+            E1["/url-to-html"]
+            E2["/url-to-html-dict"]
+            E3["/url-to-html-document"]
         end
         
         subgraph "Analysis Endpoints"
-            E4[/url-to-text-nodes]
-            E5[/url-to-ratings]
-            E6[/url-to-html-ratings]
-            E7[/url-to-html-topics]
+            E4["/url-to-text-nodes"]
+            E5["/url-to-ratings"]
+            E6["/url-to-html-ratings"]
+            E7["/url-to-html-topics"]
         end
         
         subgraph "Filtering Endpoints"
-            E8[/url-to-html-xxx]
-            E9[/url-to-html-min-rating]
-            E10[/url-to-html-max-rating]
-            E11[/url-to-html-hashes]
+            E8["/url-to-html-xxx"]
+            E9["/url-to-html-min-rating"]
+            E10["/url-to-html-max-rating"]
+            E11["/url-to-html-hashes"]
         end
     end
     
