@@ -2,7 +2,8 @@ from unittest                                                                   
 from osbot_utils.utils.Misc                                                         import list_set
 from mgraph_ai_web_content_filtering.wcf__fast_api.core.Html__Extract_Text_Nodes    import Html__Extract_Text_Nodes
 from mgraph_ai_web_content_filtering.wcf__fast_api.core.Html__Transformations       import WEBSITE_URL__DEFAULT_SITE
-from tests.integration.osbot_aws__objs_for__integration_tests                       import setup_local_stack
+from tests.unit.wcf__objs_for_tests                                                 import setup_local_stack
+
 
 class test_Html__Extract_Text_Nodes(TestCase):
 
