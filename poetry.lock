@@ -14,14 +14,14 @@ files = [
 
 [[package]]
 name = "anyio"
-version = "4.9.0"
-description = "High level compatibility layer for multiple asynchronous event loop implementations"
+version = "4.10.0"
+description = "High-level concurrency and networking framework on top of asyncio or Trio"
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "anyio-4.9.0-py3-none-any.whl", hash = "sha256:9f76d541cad6e36af7beb62e978876f3b41e3e04f2c1fbf0884604c0a9c4d93c"},
-    {file = "anyio-4.9.0.tar.gz", hash = "sha256:673c0c244e15788651a4ff38710fea9675823028a6f08a5eda409e0c9840a028"},
+    {file = "anyio-4.10.0-py3-none-any.whl", hash = "sha256:60e474ac86736bbfd6f210f7a61218939c318f43f9972497381f1c5e930ed3d1"},
+    {file = "anyio-4.10.0.tar.gz", hash = "sha256:3f3fae35c96039744587aa5b8371e7e8e603c0702999535961dd336026973ba6"},
 ]
 
 [package.dependencies]
@@ -30,24 +30,22 @@ sniffio = ">=1.1"
 typing_extensions = {version = ">=4.5", markers = "python_version < \"3.13\""}
 
 [package.extras]
-doc = ["Sphinx (>=8.2,<9.0)", "packaging", "sphinx-autodoc-typehints (>=1.2.0)", "sphinx_rtd_theme"]
-test = ["anyio[trio]", "blockbuster (>=1.5.23)", "coverage[toml] (>=7)", "exceptiongroup (>=1.2.0)", "hypothesis (>=4.0)", "psutil (>=5.9)", "pytest (>=7.0)", "trustme", "truststore (>=0.9.1)", "uvloop (>=0.21)"]
 trio = ["trio (>=0.26.1)"]
 
 [[package]]
 name = "boto3"
-version = "1.39.16"
+version = "1.40.5"
 description = "The AWS SDK for Python"
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "boto3-1.39.16-py3-none-any.whl", hash = "sha256:cf843228928fd1caebb46c21fbd757a390ce22672b937a354ae89a1d16cb99f8"},
-    {file = "boto3-1.39.16.tar.gz", hash = "sha256:d4ce6ba5c030d7ff2033b35e5574d2414e42b80b937bf40d080e11c4d9d0acc1"},
+    {file = "boto3-1.40.5-py3-none-any.whl", hash = "sha256:8072f11a973709b582ef9834794721d543869cc506d029477172054dcc19c2da"},
+    {file = "boto3-1.40.5.tar.gz", hash = "sha256:7340706beffe93e3638adcd77cb266f46ba424f77623a5a6be591baa3cdbd3f3"},
 ]
 
 [package.dependencies]
-botocore = ">=1.39.16,<1.40.0"
+botocore = ">=1.40.5,<1.41.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.13.0,<0.14.0"
 
@@ -56,14 +54,14 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.39.16"
+version = "1.40.5"
 description = "Low-level, data-driven core of boto 3."
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "botocore-1.39.16-py3-none-any.whl", hash = "sha256:1f1c3b614ac88fd68f824c481cfd7686460c38fe13c01e2963556e7186be3248"},
-    {file = "botocore-1.39.16.tar.gz", hash = "sha256:b5a1416849637aa8e72292ee3e7b11cd0c22f9b96f6043d2ac6ba0092a193188"},
+    {file = "botocore-1.40.5-py3-none-any.whl", hash = "sha256:fbad8ce6605d45d12b9efbdcc9bbf68bcc5acc1ae3eb7dabb5919f38feeeeef7"},
+    {file = "botocore-1.40.5.tar.gz", hash = "sha256:f0c95e35a3a96a2b33d257160cbee923ae87b14ac3ba10f010f3baf8e03f73a2"},
 ]
 
 [package.dependencies]
@@ -76,14 +74,14 @@ crt = ["awscrt (==0.23.8)"]
 
 [[package]]
 name = "certifi"
-version = "2025.7.14"
+version = "2025.8.3"
 description = "Python package for providing Mozilla's CA Bundle."
 optional = false
 python-versions = ">=3.7"
 groups = ["main"]
 files = [
-    {file = "certifi-2025.7.14-py3-none-any.whl", hash = "sha256:6b31f564a415d79ee77df69d757bb49a5bb53bd9f756cbbe24394ffd6fc1f4b2"},
-    {file = "certifi-2025.7.14.tar.gz", hash = "sha256:8ea99dbdfaaf2ba2f9bac77b9249ef62ec5218e7c2b2e903378ed5fccf765995"},
+    {file = "certifi-2025.8.3-py3-none-any.whl", hash = "sha256:f6c12493cfb1b06ba2ff328595af9350c65d6644968e5d3a2ffd78699af217a5"},
+    {file = "certifi-2025.8.3.tar.gz", hash = "sha256:e564105f78ded564e3ae7c923924435e1daa7463faeab5bb932bc53ffae63407"},
 ]
 
 [[package]]
@@ -361,14 +359,14 @@ osbot-utils = "*"
 
 [[package]]
 name = "osbot-aws"
-version = "2.39.2"
+version = "2.39.3"
 description = "OWASP Security Bot - AWS"
 optional = false
 python-versions = "<4.0,>=3.9"
 groups = ["main"]
 files = [
-    {file = "osbot_aws-2.39.2-py3-none-any.whl", hash = "sha256:dd8c14d75b2c153044bd34a6dfd1bce48e058ea6d4d4d8c58b69318a7f32b71f"},
-    {file = "osbot_aws-2.39.2.tar.gz", hash = "sha256:e83fc7c6557c94ae90f69597cbb1f7366e67cf343c88abf5a69156a12e5ceb8c"},
+    {file = "osbot_aws-2.39.3-py3-none-any.whl", hash = "sha256:a96916f8165c8864c8ed54a6794102921b66360776b0e88e38003e51032dafa4"},
+    {file = "osbot_aws-2.39.3.tar.gz", hash = "sha256:b8beecf53dbf19a377a7e64c6fd53b9f791082b8900866c88fbb8d2307b48dcc"},
 ]
 
 [package.dependencies]
@@ -396,14 +394,14 @@ uvicorn = "*"
 
 [[package]]
 name = "osbot-fast-api-serverless"
-version = "1.1.0"
+version = "1.2.0"
 description = "OSBot-Fast-API-Serverless"
 optional = false
 python-versions = "<4.0,>=3.12"
 groups = ["main"]
 files = [
-    {file = "osbot_fast_api_serverless-1.1.0-py3-none-any.whl", hash = "sha256:21689104b9e08d66266e916575a95064604acef3394925fda8e1e5aa3beddb6f"},
-    {file = "osbot_fast_api_serverless-1.1.0.tar.gz", hash = "sha256:eb6e0e61bf69834cb9066bb88a1c0f0d26d3cae58f2098d7dcd4418ce624dc8f"},
+    {file = "osbot_fast_api_serverless-1.2.0-py3-none-any.whl", hash = "sha256:b7c06ad825a42e41906309eacafa7229a91eb8a6dec8577b6c0472e8ee4bf890"},
+    {file = "osbot_fast_api_serverless-1.2.0.tar.gz", hash = "sha256:b6f85a123a30d0d38ec5013bd214034ca04d7e8e2e19c1e14541eb81484c9124"},
 ]
 
 [package.dependencies]
@@ -413,14 +411,14 @@ osbot-fast-api = "*"
 
 [[package]]
 name = "osbot-utils"
-version = "2.71.0"
+version = "2.72.0"
 description = "OWASP Security Bot - Utils"
 optional = false
 python-versions = "<4.0,>=3.7"
 groups = ["main"]
 files = [
-    {file = "osbot_utils-2.71.0-py3-none-any.whl", hash = "sha256:d027e8a2486ebf38e944d7d3742a2228db4e20d6616cedb99fbc9f10c4b15c6e"},
-    {file = "osbot_utils-2.71.0.tar.gz", hash = "sha256:3b1555159719dc94b764d1760b3b4510f1fb562a917040d5fe2a1d598f73b0b3"},
+    {file = "osbot_utils-2.72.0-py3-none-any.whl", hash = "sha256:a846fd1fe0c34e0c9137e5fd5aad77d6000ad0ba8de5b9537fbd7bb51756a619"},
+    {file = "osbot_utils-2.72.0.tar.gz", hash = "sha256:8df0886de2b58f83d0f5837f8305ffc4d685b4f7cf6fcd174bad5652705971e6"},
 ]
 
 [[package]]

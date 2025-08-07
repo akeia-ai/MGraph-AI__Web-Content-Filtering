@@ -1,12 +1,8 @@
 from unittest                                                                       import TestCase
-
-from osbot_utils.utils.Objects import obj
-
-from osbot_utils.utils.Dev                                                          import pprint
+from osbot_utils.utils.Misc                                                         import list_set
 from mgraph_ai_web_content_filtering.wcf__fast_api.core.Html__Extract_Text_Nodes    import Html__Extract_Text_Nodes
 from mgraph_ai_web_content_filtering.wcf__fast_api.core.Html__Transformations       import WEBSITE_URL__DEFAULT_SITE
 from tests.integration.osbot_aws__objs_for__integration_tests                       import setup_local_stack
-
 
 class test_Html__Extract_Text_Nodes(TestCase):
 
@@ -44,14 +40,17 @@ class test_Html__Extract_Text_Nodes(TestCase):
         with self.html_extract_text_nodes as _:
             _.url = url
             ratings = _.create_ratings()
-            assert len(ratings.get('data').get('ratings')) == 22
+            assert len(ratings) == 22
+            for text_hash, rating in ratings.items():
+                assert len(text_hash)   == 10
+                assert list_set(rating) == ['hash', 'positivity', 'topic']
 
     def test_5__create_html_with_ratings(self):
         url = WEBSITE_URL__DEFAULT_SITE
         with self.html_extract_text_nodes as _:
             _.url = url
             html_with_ratings = _.create_html_with_ratings()
-            assert "<title>0.2</title>" in html_with_ratings
+            assert "<title>Negative: (0.2)</title>" in html_with_ratings
 
     def test_6__create_html_with_ratings(self):
         url = WEBSITE_URL__DEFAULT_SITE
