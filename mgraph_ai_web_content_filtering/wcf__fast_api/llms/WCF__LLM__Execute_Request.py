@@ -9,7 +9,7 @@ from mgraph_ai_web_content_filtering.wcf__fast_api.llms.LLM__Prompt__Extract_Rat
 from mgraph_ai_web_content_filtering.wcf__fast_api.llms.WCF__LLM__Cache                    import WCF__LLM__Cache
 
 #LLM__MODEL_TO_USE__DEFAULT = Schema__WCF__LLM__Supported_Models.Mistral_AI__Mistral_Small__Free
-LLM__MODEL_TO_USE__DEFAULT = Schema__WCF__LLM__Supported_Models.Open_AI__GPT_5__Nano
+LLM__MODEL_TO_USE__DEFAULT = Schema__WCF__LLM__Supported_Models.Google__Gemini_2_0  # Open_AI__GPT_5__Nano
 
 class WCF__LLM__Execute_Request(Type_Safe):
     virtual_storage: WCF__LLM__Cache = None

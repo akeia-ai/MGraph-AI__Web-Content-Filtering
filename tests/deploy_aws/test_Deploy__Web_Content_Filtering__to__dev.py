@@ -1,5 +1,8 @@
 import pytest
 from unittest                                                                   import TestCase
+
+from mgraph_ai_web_content_filtering.utils.deploy.Deploy__Web_Content_Filtering import \
+    LAMBDA_DEPENDENCIES__WEB_CONTENT_FILTERING
 from osbot_aws.AWS_Config                                                       import AWS_Config
 from osbot_utils.utils.Misc                                                     import list_set
 from osbot_fast_api_serverless.utils.Version                                    import version__osbot_fast_api_serverless
