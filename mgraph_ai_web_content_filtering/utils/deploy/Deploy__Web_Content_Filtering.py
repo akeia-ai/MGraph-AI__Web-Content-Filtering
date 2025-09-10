@@ -2,7 +2,7 @@ from osbot_fast_api_serverless.deploy.Deploy__Serverless__Fast_API  import Deplo
 from mgraph_ai_web_content_filtering.lambdas.wcf__handler           import run
 
 LAMBDA_NAME__WEB_CONTENT_FILTERING         = 'web-content-filtering'
-LAMBDA_DEPENDENCIES__WEB_CONTENT_FILTERING = ['osbot-fast-api-serverless']
+LAMBDA_DEPENDENCIES__WEB_CONTENT_FILTERING = ['osbot-fast-api-serverless==v1.18.0']
 
 class Deploy__Web_Content_Filtering(Deploy__Serverless__Fast_API):
 
