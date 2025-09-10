@@ -1,6 +1,6 @@
 from osbot_aws.aws.lambda_.boto3__lambda import load_dependencies
 
-LAMBDA_DEPENDENCIES =  ['osbot-fast-api-serverless']
+LAMBDA_DEPENDENCIES =  ['osbot-fast-api-serverless==v1.17.0']
 
 load_dependencies(LAMBDA_DEPENDENCIES)
 

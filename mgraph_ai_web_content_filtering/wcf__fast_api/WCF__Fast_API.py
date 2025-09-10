@@ -1,5 +1,5 @@
-from osbot_fast_api_serverless.fast_api.Serverless__Fast_API                  import Serverless__Fast_API
-from osbot_fast_api_serverless.fast_api.routes.Routes__Info import Routes__Info
+from osbot_fast_api_serverless.fast_api.Serverless__Fast_API    import Serverless__Fast_API
+from osbot_fast_api_serverless.fast_api.routes.Routes__Info     import Routes__Info
 
 
 #from mgraph_ai_web_content_filtering.wcf__fast_api.routes.Routes__Html_Graphs import Routes__Html_Graphs

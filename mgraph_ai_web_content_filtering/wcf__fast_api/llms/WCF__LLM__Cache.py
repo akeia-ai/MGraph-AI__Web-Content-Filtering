@@ -1,6 +1,6 @@
-from osbot_aws.aws.s3.S3__DB_Base                       import S3__DB_Base
-from osbot_utils.helpers.safe_str.Safe_Str__File__Path  import Safe_Str__File__Path
-from osbot_aws.aws.s3.S3__Virtual_Storage               import Virtual_Storage__S3
+from osbot_utils.type_safe.primitives.safe_str.filesystem.Safe_Str__File__Path  import Safe_Str__File__Path
+from osbot_aws.aws.s3.S3__DB_Base                                               import S3__DB_Base
+from osbot_aws.aws.s3.S3__Virtual_Storage                                       import Virtual_Storage__S3
 
 WCF__LLM__CACHE__DEFAULT__ROOT_FOLDER = Safe_Str__File__Path('llm-cache/')
 WCF__LLM__CACHE__BUCKET_NAME__PREFIX  = 'wcf'

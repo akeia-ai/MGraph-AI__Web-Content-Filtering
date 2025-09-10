@@ -1,10 +1,12 @@
-from osbot_utils.helpers.safe_str.Safe_Str__Text import Safe_Str__Text
+from osbot_utils.type_safe.primitives.safe_str.llm.Safe_Str__LLM__Model_Id import Safe_Str__LLM__Model_Id
 
+from osbot_utils.type_safe.primitives.safe_str.text.Safe_Str__Text import Safe_Str__Text
+
+from osbot_utils.type_safe.type_safe_core.decorators.type_safe                import type_safe
 from osbot_utils.helpers.llms.builders.LLM_Request__Builder__Open_AI          import LLM_Request__Builder__Open_AI
 from osbot_utils.helpers.llms.schemas.Schema__LLM_Request                     import Schema__LLM_Request
 from osbot_utils.helpers.llms.schemas.Schema__LLM_Response                    import Schema__LLM_Response
 from osbot_utils.type_safe.Type_Safe                                          import Type_Safe
-from osbot_utils.type_safe.decorators.type_safe                               import type_safe
 from osbot_utils.utils.Json                                                   import str_to_json
 
 from mgraph_ai_web_content_filtering.wcf__fast_api.llms.Schema__Text__Rating import Schema__Text__Rating, \
@@ -50,7 +52,7 @@ Extract:
 class LLM__Prompt__Extract_Rating(Type_Safe):
     request_builder: LLM_Request__Builder__Open_AI
 
-    def llm_request(self, text_content: str, model_to_use: Safe_Str__Text) -> Schema__LLM_Request:
+    def llm_request(self, text_content: str, model_to_use: Safe_Str__LLM__Model_Id) -> Schema__LLM_Request:
         system_prompt = SYSTEM_PROMPT__EXTRACT_RATING
         user_prompt   = USER_PROMPT__EXTRACT_RATING.format(text_content=text_content)
 

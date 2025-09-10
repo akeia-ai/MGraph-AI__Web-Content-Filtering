@@ -1,9 +1,7 @@
 import pytest
 from unittest                                                                                   import TestCase
-
 from mgraph_ai_web_content_filtering.wcf__fast_api.llms.API__LLM__Open_Router import ENV_NAME_OPEN_ROUTER__API_KEY
 from osbot_utils.utils.Misc                                                                     import list_set
-from osbot_utils.helpers.llms.platforms.open_ai.API__LLM__Open_AI                               import ENV_NAME_OPEN_AI__API_KEY
 from osbot_utils.helpers.llms.schemas.Schema__LLM_Request__Message__Role                        import Schema__LLM_Request__Message__Role
 from osbot_utils.utils.Env                                                                      import get_env, load_dotenv
 from mgraph_ai_web_content_filtering.wcf__fast_api.llms.LLM__Prompt__Extract_Rating             import LLM__Prompt__Extract_Rating, SYSTEM_PROMPT__EXTRACT_RATING

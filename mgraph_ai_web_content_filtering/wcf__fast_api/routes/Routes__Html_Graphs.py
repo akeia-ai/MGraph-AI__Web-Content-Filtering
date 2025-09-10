@@ -1,4 +1,4 @@
-from osbot_fast_api.api.Fast_API_Routes                                                     import Fast_API_Routes
+from osbot_fast_api.api.routes.Fast_API__Routes                                             import Fast_API__Routes
 from starlette.responses                                                                    import HTMLResponse, PlainTextResponse
 from mgraph_ai_web_content_filtering.wcf__fast_api.core.Html__Extract_Text_Nodes            import Html__Extract_Text_Nodes
 from mgraph_ai_web_content_filtering.wcf__fast_api.core.Html__Transformations               import Html__Transformations, WEBSITE_URL__DEFAULT_SITE
@@ -20,7 +20,7 @@ ROUTES_PATHS__HTML_GRAPHS = [f'/{ROUTES__TAG__HTML_GRAPHS}/url-to-html'         
                              f'/{ROUTES__TAG__HTML_GRAPHS}/url-to-ratings'          ,
                              f'/{ROUTES__TAG__HTML_GRAPHS}/url-to-text-nodes'       ]
 
-class Routes__Html_Graphs(Fast_API_Routes):
+class Routes__Html_Graphs(Fast_API__Routes):
     tag                  : str                       = ROUTES__TAG__HTML_GRAPHS
     html_transformations : Html__Transformations     = None
     llm_execute          : WCF__LLM__Execute_Request = None
