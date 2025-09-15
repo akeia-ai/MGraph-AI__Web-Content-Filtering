@@ -28,18 +28,25 @@ class Html__Transformations(Type_Safe):
     def file_path__from_url(self, url, extension):
         return path_combine(self.base_folder(), self.file_name__from_url(url, extension))
 
-    def url__to__html(self, url):
+    def default_headers(self):
+        headers = { 'User-Agent'               : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36',
+                    'Accept'                   : 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+                    'Connection'               : 'keep-alive',
+                    'Upgrade-Insecure-Requests': '1'         }
+        return headers
+
+    def url__to__html(self, url, reload=False):
         file_path = self.file_path__from_url(url, '.html')
-        if file_not_exists(file_path):
-            response = requests.get(url)                            # use requests here since it handles natively sites like google (which uses a different encoding)
+        if reload or file_not_exists(file_path):
+            response = requests.get(url, headers=self.default_headers())
             html     = response.text
             file_save(html, path=file_path)
         else:
             html = file_contents(file_path)
         return html
 
-    def url__to__html_dict(self, url):
-        html      = self.url__to__html(url)
+    def url__to__html_dict(self, url, reload=False):
+        html      = self.url__to__html(url, reload=reload)
         html_dict = Html__To__Html_Dict(html=html).convert()
         return html_dict
 

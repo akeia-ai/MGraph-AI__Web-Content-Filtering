@@ -11,8 +11,8 @@ class Routes__Url(Fast_API__Routes):
     tag = ROUTES__TAG__URL
 
 
-    def to__hashes(self, url = WEBSITE_URL__DEFAULT_SITE):
-        with Html__Extract_Text_Nodes(url=url) as _:
+    def to__hashes(self, url = WEBSITE_URL__DEFAULT_SITE, reload=False):
+        with Html__Extract_Text_Nodes(url=url, reload=reload) as _:
             return _.extract()
 
 
