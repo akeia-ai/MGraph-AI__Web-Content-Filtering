@@ -1,8 +1,8 @@
 from osbot_aws.aws.lambda_.boto3__lambda import load_dependencies
 
-LAMBDA_DEPENDENCIES =  ['osbot-fast-api-serverless==v1.18.0']
+LAMBDA_DEPENDENCIES__WEB_CONTENT_FILTERING =  ['osbot-fast-api-serverless==v1.19.0']
 
-load_dependencies(LAMBDA_DEPENDENCIES)
+load_dependencies(LAMBDA_DEPENDENCIES__WEB_CONTENT_FILTERING)
 
 def clear_osbot_modules():                            # todo: add this to load_dependencies method, since after it runs we don't need the osbot_aws.aws.lambda_.boto3__lambda
     import sys

@@ -11,6 +11,7 @@ from osbot_utils.type_safe.Type_Safe                                            
 from osbot_utils.utils.Misc                                                                 import str_md5
 from mgraph_ai_web_content_filtering.wcf__fast_api.core.Html__Transformations               import Html__Transformations, WEBSITE_URL__DEFAULT_SITE
 
+DEFAULT_MAX_DEPTH = 256         # todo: understand the side effect of this
 
 class Html__Extract_Text_Nodes(Type_Safe):
     html_transformations: Html__Transformations
@@ -32,7 +33,7 @@ class Html__Extract_Text_Nodes(Type_Safe):
         return hash
 
     def traverse(self, node, depth, parent_tag):
-        if depth > self.max_depth:
+        if depth > self.max_depth:                                          # todo: capture when this happens in results
             return
 
         if not isinstance(node, dict):
@@ -48,7 +49,7 @@ class Html__Extract_Text_Nodes(Type_Safe):
         for child in node.get(STRING__SCHEMA_NODES, []):
             self.traverse(child, depth + 1, node_tag)
 
-    def extract(self, max_depth=35) -> Dict:
+    def extract(self, max_depth=DEFAULT_MAX_DEPTH) -> Dict:
         self.max_depth = max_depth
         self.html_dict = self.html_transformations.url__to__html_dict(self.url)
         self.traverse(self.html_dict, depth=0, parent_tag=None)

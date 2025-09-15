@@ -1,13 +1,10 @@
-from osbot_utils.type_safe.primitives.safe_str.llm.Safe_Str__LLM__Model_Id import Safe_Str__LLM__Model_Id
-
-from osbot_utils.type_safe.primitives.safe_str.text.Safe_Str__Text import Safe_Str__Text
-
-from osbot_utils.type_safe.type_safe_core.decorators.type_safe                import type_safe
-from osbot_utils.helpers.llms.builders.LLM_Request__Builder__Open_AI          import LLM_Request__Builder__Open_AI
-from osbot_utils.helpers.llms.schemas.Schema__LLM_Request                     import Schema__LLM_Request
-from osbot_utils.helpers.llms.schemas.Schema__LLM_Response                    import Schema__LLM_Response
-from osbot_utils.type_safe.Type_Safe                                          import Type_Safe
-from osbot_utils.utils.Json                                                   import str_to_json
+from osbot_utils.type_safe.primitives.domains.llm.safe_str.Safe_Str__LLM__Model_Id import Safe_Str__LLM__Model_Id
+from osbot_utils.type_safe.type_safe_core.decorators.type_safe                     import type_safe
+from osbot_utils.helpers.llms.builders.LLM_Request__Builder__Open_AI               import LLM_Request__Builder__Open_AI
+from osbot_utils.helpers.llms.schemas.Schema__LLM_Request                          import Schema__LLM_Request
+from osbot_utils.helpers.llms.schemas.Schema__LLM_Response                         import Schema__LLM_Response
+from osbot_utils.type_safe.Type_Safe                                               import Type_Safe
+from osbot_utils.utils.Json                                                        import str_to_json
 
 from mgraph_ai_web_content_filtering.wcf__fast_api.llms.Schema__Text__Rating import Schema__Text__Rating, \
     Schema__Text__Ratings
