@@ -1,10 +1,7 @@
-from unittest                                                                   import TestCase
-
-from osbot_fast_api.api.Fast_API import ENV_VAR__FAST_API__AUTH__API_KEY__NAME, ENV_VAR__FAST_API__AUTH__API_KEY__VALUE
-
-from osbot_utils.utils.Env import get_env
-
-from tests.unit.wcf__objs_for_tests import wcf_tests__setup_fast_api, setup_local_stack
+from unittest                               import TestCase
+from osbot_fast_api.api.Fast_API            import ENV_VAR__FAST_API__AUTH__API_KEY__NAME, ENV_VAR__FAST_API__AUTH__API_KEY__VALUE
+from osbot_utils.utils.Env                  import get_env
+from tests.unit.wcf__objs_for_tests         import wcf_tests__setup_fast_api, setup_local_stack
 
 
 class test_Routes__Html_Graphs(TestCase):
