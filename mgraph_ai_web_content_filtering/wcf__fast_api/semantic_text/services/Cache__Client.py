@@ -1,10 +1,10 @@
 import hashlib
 import requests
 from typing                                                                                             import Dict, Any, Optional
+from memory_fs.schemas.Safe_Str__Cache_Hash                                                             import Safe_Str__Cache_Hash
 from requests                                                                                           import RequestException
 from osbot_utils.decorators.methods.cache_on_self                                                       import cache_on_self
 from osbot_utils.type_safe.primitives.domains.identifiers.safe_str.Safe_Str__Id                         import Safe_Str__Id
-from osbot_utils.type_safe.primitives.domains.cryptography.safe_str.Safe_Str__Hash                      import Safe_Str__Hash
 from mgraph_ai_web_content_filtering.wcf__fast_api.semantic_text.config.consts__Semantic_Text           import CACHE_SERVICE_URL, CACHE_NAMESPACE_DEFAULT, CACHE_STRATEGY_DEFAULT, ENV_VAR__API_KEY__SERVICE__CACHE__KEY_NAME, ENV_VAR__API_KEY__SERVICE__CACHE__KEY_VALUE
 from mgraph_ai_web_content_filtering.wcf__fast_api.semantic_text.schemas.Enum__Cache__Store__Strategy   import Enum__Cache__Store__Strategy
 from osbot_utils.type_safe.Type_Safe                                                                    import Type_Safe
@@ -36,7 +36,7 @@ class Cache__Client(Type_Safe):                                                 
         return f"{path[:truncate_at]}__{path_hash}"
     
     def store_json(self, data       : Dict[str, Any]                                       ,  # Store JSON data with semantic path
-                         cache_key  : Safe_Str__Hash               = None                  ,  # Semantic path for organization
+                         cache_key  : Safe_Str__Cache_Hash         = None                  ,  # Semantic path for organization
                          file_id    : Safe_Str__Id                 = None                  ,  # Custom file identifier
                          strategy   : Enum__Cache__Store__Strategy = CACHE_STRATEGY_DEFAULT,
                          namespace  : Safe_Str__Key                = None
@@ -51,13 +51,14 @@ class Cache__Client(Type_Safe):                                                 
 
         params   = {"file_id": file_id} if file_id else {}                                        # Add file_id as query parameter if provided
         response = requests.post(url, json=data, headers=self.headers(), params=params)
+        # https://cache.dev.mgraph.ai/semantic-html/semantic_file/store/json/sites/test.com/manifest?file_id=manifest
         if response.status_code != 200:
             raise Exception(response.text)
             #response.raise_for_status()
         return response.json()
     
     def store_string(self, data       : str                                                  ,     # Store string data with semantic path
-                           cache_key  : Safe_Str__Hash               = None                  ,
+                           cache_key  : Safe_Str__Cache_Hash         = None                  ,
                            file_id    : Safe_Str__Id                 = None                  ,
                            strategy   : Enum__Cache__Store__Strategy = CACHE_STRATEGY_DEFAULT,
                            namespace  : Safe_Str__Key                = None
@@ -78,7 +79,7 @@ class Cache__Client(Type_Safe):                                                 
         return response.json()
     
     def store_binary(self, data            : bytes                                 ,  # Store binary data with semantic path
-                           cache_key       : Safe_Str__Hash               = None                    ,
+                           cache_key       : Safe_Str__Cache_Hash         = None                    ,
                            file_id         : Safe_Str__Id                 = None                    ,
                            strategy        : Enum__Cache__Store__Strategy = CACHE_STRATEGY_DEFAULT  ,
                            namespace       : Safe_Str__Key                = None                    ,

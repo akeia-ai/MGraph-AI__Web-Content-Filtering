@@ -1,6 +1,6 @@
+from memory_fs.schemas.Safe_Str__Cache_Hash                                                     import Safe_Str__Cache_Hash
 from osbot_utils.type_safe.primitives.domains.numerical.safe_float.Safe_Float__Percentage_Exact import Safe_Float__Percentage_Exact
 from osbot_utils.type_safe.primitives.core.Safe_UInt                                            import Safe_UInt
-from osbot_utils.type_safe.primitives.domains.cryptography.safe_str.Safe_Str__Hash              import Safe_Str__Hash
 from osbot_utils.type_safe.Type_Safe                                                            import Type_Safe
 from osbot_utils.type_safe.primitives.domains.identifiers.safe_str.Safe_Str__Display_Name       import Safe_Str__Display_Name
 from osbot_utils.type_safe.primitives.domains.identifiers.Timestamp_Now                         import Timestamp_Now
@@ -11,9 +11,9 @@ class Schema__Cache__Common_Elements(Type_Safe):                                
     threshold_percent : Safe_Float__Percentage_Exact          = 30.0            # Minimum % of pages to be considered common
     total_pages       : int                                                     # Total pages analyzed
     last_updated      : Timestamp_Now                                           # Auto-generates timestamp
-    common_hashes     : Set[Safe_Str__Hash]                                     # Hashes appearing above threshold
-    hash_frequencies  : Dict[Safe_Str__Hash, Safe_UInt]                         # Hash -> occurrence count
-    classifications   : Dict[Safe_Str__Hash, Dict[str, Any]]                    # Hash -> classification data
+    common_hashes     : Set[Safe_Str__Cache_Hash]                               # Hashes appearing above threshold
+    hash_frequencies  : Dict[Safe_Str__Cache_Hash, Safe_UInt]                   # Hash -> occurrence count
+    classifications   : Dict[Safe_Str__Cache_Hash, Dict[str, Any]]              # Hash -> classification data
 
     # todo: remove this logic from this schema file
     def is_common(self, hash_value: str) -> bool:                               # Check if hash is considered common

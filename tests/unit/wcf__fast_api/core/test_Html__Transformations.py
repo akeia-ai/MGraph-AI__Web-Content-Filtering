@@ -7,7 +7,7 @@ class test_Html__Transformations(TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.html_transformations = Html__Transformations().setup()
+        cls.html_transformations = Html__Transformations()
 
     def test__init__(self):
         with self.html_transformations as _:

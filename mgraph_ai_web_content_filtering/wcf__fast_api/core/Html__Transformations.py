@@ -1,5 +1,6 @@
 import requests
 from osbot_utils.type_safe.primitives.domains.files.safe_str.Safe_Str__File__Name   import Safe_Str__File__Name
+from osbot_utils.type_safe.primitives.domains.web.safe_str.Safe_Str__Url            import Safe_Str__Url
 from osbot_utils.helpers.html.transformers.Html__To__Html_Document                  import Html__To__Html_Document
 from osbot_utils.helpers.html.transformers.Html_Dict__To__Html                      import Html_Dict__To__Html
 from osbot_utils.helpers.html.transformers.Html__To__Html_Dict                      import Html__To__Html_Dict
@@ -7,7 +8,7 @@ from osbot_utils.decorators.methods.cache_on_self                               
 from osbot_utils.type_safe.Type_Safe                                                import Type_Safe
 from osbot_utils.utils.Files                                                        import path_combine, file_not_exists, file_save, file_contents, folder_create, current_temp_folder, create_folder
 
-WEBSITE_URL__DEFAULT_SITE = "https://www.bbc.co.uk/404"
+WEBSITE_URL__DEFAULT_SITE = Safe_Str__Url("https://www.bbc.co.uk/404")
 FOLDER__TEMP_DATA         = 'WCF__Temp_Data'
 
 class Html__Transformations(Type_Safe):
@@ -17,10 +18,6 @@ class Html__Transformations(Type_Safe):
         base_folder = path_combine(current_temp_folder(), FOLDER__TEMP_DATA)            # use current_temp_folder() has the core target
         create_folder(base_folder)                                                      # make sure the folder exists
         return base_folder
-
-    def setup(self):
-        folder_create(self.base_folder())                                           # make sure base folder exists
-        return self
 
     def file_name__from_url(self, url, extension):
         return Safe_Str__File__Name(url) + extension

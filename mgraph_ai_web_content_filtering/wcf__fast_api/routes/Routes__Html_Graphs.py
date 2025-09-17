@@ -27,7 +27,7 @@ class Routes__Html_Graphs(Fast_API__Routes):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.html_transformations = Html__Transformations().setup()
+        self.html_transformations = Html__Transformations()
         self.llm_execute          = WCF__LLM__Execute_Request()
 
     def url_to_html(self, url : str=WEBSITE_URL__DEFAULT_SITE):
