@@ -1,14 +1,11 @@
 import hashlib
 from typing                                                                                     import Dict, Optional
-
-from osbot_utils.type_safe.primitives.domains.files.safe_str.Safe_Str__File__Path import Safe_Str__File__Path
-
-from mgraph_ai_web_content_filtering.wcf__fast_api.semantic_text.config.consts__Semantic_Text import CACHE_PREFIX__SITES, FILE_ID__HTML__RAW__CONTENT, FILE_ID__HTML__RAW__DICT, \
-    FILE_ID__HTML__TEXT_NODES, FILE_ID__HTML__TEXT_RATINGS
+from osbot_utils.type_safe.primitives.domains.files.safe_str.Safe_Str__File__Path               import Safe_Str__File__Path
+from mgraph_ai_web_content_filtering.wcf__fast_api.semantic_text.config.consts__Semantic_Text   import CACHE_PREFIX__SITES, FILE_ID__HTML__RAW__CONTENT, FILE_ID__HTML__RAW__DICT, FILE_ID__HTML__TEXT_NODES, FILE_ID__HTML__TEXT_RATINGS, CACHE_SUFFIX__HTML_DICT
 from osbot_utils.type_safe.Type_Safe                                                            import Type_Safe
 from osbot_utils.type_safe.primitives.domains.web.safe_str.Safe_Str__Url                        import Safe_Str__Url
 from mgraph_ai_web_content_filtering.wcf__fast_api.semantic_text.services.Cache__Client         import Cache__Client
-from osbot_utils.utils.Http import url_join_safe
+from osbot_utils.utils.Http                                                                     import url_join_safe
 
 
 class Html__Cache__Manager(Type_Safe):                                          # Manages HTML caching via cache.dev.mgraph.ai
@@ -60,7 +57,7 @@ class Html__Cache__Manager(Type_Safe):                                          
         return None
     
     def store_html_dict(self, url: Safe_Str__Url, html_dict: Dict) -> Dict:    # Store HTML dict representation
-        cache_key = self._cache_key_for_url(url, CACHE_PREFIX__SITES)
+        cache_key  = self._cache_key_for_url(url, prefix=CACHE_PREFIX__SITES, suffix=CACHE_SUFFIX__HTML_DICT)
         file_id   = FILE_ID__HTML__RAW__DICT
         result    = self.cache_client.store_json(data      = html_dict   ,
                                                  cache_key = cache_key   ,
@@ -70,7 +67,7 @@ class Html__Cache__Manager(Type_Safe):                                          
         return result
     
     def retrieve_html_dict(self, url: Safe_Str__Url) -> Optional[Dict]:        # Retrieve HTML dict for a URL
-        cache_key  = self._cache_key_for_url(url, CACHE_PREFIX__SITES)
+        cache_key  = self._cache_key_for_url(url, prefix=CACHE_PREFIX__SITES, suffix=CACHE_SUFFIX__HTML_DICT)
         cache_hash = self._hash_for_cache_key(cache_key)
         
         cached_entry = self.cache_client.retrieve_json_by_hash(cache_hash, namespace=self.namespace())
@@ -130,7 +127,7 @@ class Html__Cache__Manager(Type_Safe):                                          
         return self.cache_client.exists(cache_hash, namespace=self.namespace())
     
     def has_cached_html_dict(self, url: Safe_Str__Url) -> bool:                # Check if HTML dict is cached
-        cache_key  = self._cache_key_for_url(url, CACHE_PREFIX__SITES)
+        cache_key  = self._cache_key_for_url(url, prefix=CACHE_PREFIX__SITES, suffix=CACHE_SUFFIX__HTML_DICT)
         cache_hash = self._hash_for_cache_key(cache_key)
         return self.cache_client.exists(cache_hash, namespace=self.namespace())
     

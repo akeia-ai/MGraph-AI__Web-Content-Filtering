@@ -1,5 +1,6 @@
 import hashlib
 import requests
+from osbot_utils.type_safe.primitives.domains.files.safe_str.Safe_Str__File__Path                       import Safe_Str__File__Path
 from requests                                                                                           import RequestException
 from typing                                                                                             import Dict, Any, Optional
 from memory_fs.schemas.Safe_Str__Cache_Hash                                                             import Safe_Str__Cache_Hash
@@ -189,6 +190,13 @@ class Cache__Client(Type_Safe):                                                 
         response = requests.delete(url, headers=self.headers())
         response.raise_for_status()
         return response.json()
+
+    def delete_by_path(self, path  : Safe_Str__File__Path ) -> Dict[str, Any]:
+        url = f"{self.base_url}/admin/storage/{path}"
+
+        response = requests.delete(url, headers=self.headers())
+        response.raise_for_status()
+        return response.json()
     
     def get_stats(self, namespace: Optional[Safe_Str__Key] = None             # Get namespace statistics
                   ) -> Dict[str, Any]:
@@ -216,3 +224,11 @@ class Cache__Client(Type_Safe):                                                 
         response = requests.get(url, headers=self.headers())
         response.raise_for_status()
         return response.json()
+
+    def list_files_all(self, path: Safe_Str__File__Path) -> Dict[str, Any]:
+
+        url = f"{self.base_url}/admin/storage/files/all/{path}"
+
+        response = requests.get(url, headers=self.headers())
+        response.raise_for_status()
+        return response.json().get('files')

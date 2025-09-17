@@ -321,3 +321,6 @@ class test_Cache__Client(TestCase):
             assert _.delete_by_id(cache_id=cache_id__manifest_result).get('deleted_count') > 8      # delete all 3 files
             assert _.delete_by_id(cache_id=cache_id__common_result  ).get('deleted_count') > 8
             assert _.delete_by_id(cache_id=cache_id__page_result    ).get('deleted_count') > 8
+
+
+
