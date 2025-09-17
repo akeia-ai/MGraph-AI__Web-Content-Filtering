@@ -1,4 +1,7 @@
+import pytest
 from unittest                                                                       import TestCase
+from mgraph_ai_web_content_filtering.wcf__fast_api.semantic_text.config.consts__Semantic_Text import ENV_VAR__API_KEY__SERVICE__CACHE__KEY_NAME
+from osbot_utils.utils.Env import get_env
 from osbot_utils.utils.Misc                                                         import list_set
 from mgraph_ai_web_content_filtering.wcf__fast_api.core.Html__Extract_Text_Nodes    import Html__Extract_Text_Nodes
 from mgraph_ai_web_content_filtering.wcf__fast_api.core.Html__Transformations       import WEBSITE_URL__DEFAULT_SITE
@@ -9,6 +12,8 @@ class test_Html__Extract_Text_Nodes(TestCase):
 
     @classmethod
     def setUpClass(cls):
+        if not get_env(ENV_VAR__API_KEY__SERVICE__CACHE__KEY_NAME):
+            pytest.skip("Tests requite service cache API key and value")
         setup_local_stack()
         cls.html_extract_text_nodes = Html__Extract_Text_Nodes()
 

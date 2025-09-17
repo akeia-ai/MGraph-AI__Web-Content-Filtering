@@ -1,4 +1,7 @@
 from unittest                               import TestCase
+
+import pytest
+from mgraph_ai_web_content_filtering.wcf__fast_api.semantic_text.config.consts__Semantic_Text import ENV_VAR__API_KEY__SERVICE__CACHE__KEY_NAME
 from osbot_fast_api.api.Fast_API            import ENV_VAR__FAST_API__AUTH__API_KEY__NAME, ENV_VAR__FAST_API__AUTH__API_KEY__VALUE
 from osbot_utils.utils.Env                  import get_env
 from tests.unit.wcf__objs_for_tests         import wcf_tests__setup_fast_api, setup_local_stack
@@ -7,6 +10,8 @@ from tests.unit.wcf__objs_for_tests         import wcf_tests__setup_fast_api, se
 class test_Routes__Html_Graphs(TestCase):
     @classmethod
     def setUpClass(cls):
+        if not get_env(ENV_VAR__API_KEY__SERVICE__CACHE__KEY_NAME):
+            pytest.skip("Tests requite service cache API key and value")
         setup_local_stack()
         from mgraph_ai_web_content_filtering.wcf__fast_api.routes.Routes__Html_Graphs import Routes__Html_Graphs
         cls.wcf_test_data      = wcf_tests__setup_fast_api()

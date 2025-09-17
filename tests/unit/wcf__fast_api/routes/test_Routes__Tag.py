@@ -1,5 +1,9 @@
 from unittest                                                           import TestCase
+
+import pytest
 from mgraph_ai_web_content_filtering.wcf__fast_api.routes.Routes__Url   import Routes__Url
+from mgraph_ai_web_content_filtering.wcf__fast_api.semantic_text.config.consts__Semantic_Text import ENV_VAR__API_KEY__SERVICE__CACHE__KEY_NAME
+from osbot_utils.utils.Env import get_env
 from tests.unit.wcf__objs_for_tests                                     import wcf_tests__setup_fast_api
 
 
@@ -7,6 +11,8 @@ class test_Routes__Tag(TestCase):
 
     @classmethod
     def setUpClass(cls):
+        if not get_env(ENV_VAR__API_KEY__SERVICE__CACHE__KEY_NAME):
+            pytest.skip("Tests requires service cache API key and value")
         local_objs = wcf_tests__setup_fast_api()
         cls.routes_url = Routes__Url()
 

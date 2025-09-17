@@ -1,6 +1,9 @@
 from unittest                                                                                   import TestCase
+
+import pytest
 from osbot_utils.type_safe.primitives.domains.identifiers.Safe_Id                               import Safe_Id
-from mgraph_ai_web_content_filtering.wcf__fast_api.semantic_text.config.consts__Semantic_Text   import CACHE_NAMESPACE__SEMANTIC_HTML
+from mgraph_ai_web_content_filtering.wcf__fast_api.semantic_text.config.consts__Semantic_Text import CACHE_NAMESPACE__SEMANTIC_HTML, ENV_VAR__API_KEY__SERVICE__CACHE__KEY_NAME
+from osbot_utils.utils.Env import get_env
 from osbot_utils.utils.Misc                                                                     import is_guid
 from osbot_utils.utils.Objects                                                                  import base_classes
 from osbot_utils.type_safe.Type_Safe                                                            import Type_Safe
@@ -13,7 +16,9 @@ import hashlib
 class test_Html__Cache__Manager(TestCase):
 
     @classmethod
-    def setUpClass(cls):                                                        # ONE-TIME expensive setup
+    def setUpClass(cls):
+        if not get_env(ENV_VAR__API_KEY__SERVICE__CACHE__KEY_NAME):
+            pytest.skip("Tests requires service cache API key and value")# ONE-TIME expensive setup
         setup_local_stack()                                                     # LocalStack setup (2-3s)
         cls.cache_manager = Html__Cache__Manager()                              # Initialize once
         cls.test_url      = Safe_Str__Url("https://www.example.com/test")       # Shared test URL

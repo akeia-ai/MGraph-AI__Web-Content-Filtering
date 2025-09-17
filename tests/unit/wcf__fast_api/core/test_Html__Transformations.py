@@ -1,6 +1,10 @@
 from unittest                                                                                   import TestCase
+
+import pytest
+from mgraph_ai_web_content_filtering.wcf__fast_api.semantic_text.config.consts__Semantic_Text   import ENV_VAR__API_KEY__SERVICE__CACHE__KEY_NAME
 from mgraph_ai_web_content_filtering.wcf__fast_api.semantic_text.services.Html__Cache__Manager  import Html__Cache__Manager
 from osbot_utils.helpers.html.schemas.Schema__Html_Document                                     import Schema__Html_Document
+from osbot_utils.utils.Env                                                                      import get_env
 from osbot_utils.utils.Misc                                                                     import list_set
 from osbot_utils.utils.Objects                                                                  import base_classes
 from osbot_utils.type_safe.Type_Safe                                                            import Type_Safe
@@ -12,6 +16,8 @@ class test_Html__Transformations(TestCase):
 
     @classmethod
     def setUpClass(cls):                                                        # ONE-TIME expensive setup
+        if not get_env(ENV_VAR__API_KEY__SERVICE__CACHE__KEY_NAME):
+            pytest.skip("Tests requite service cache API key and value")
         setup_local_stack()                                                     # LocalStack setup (2-3s)
         cls.html_transformations = Html__Transformations()                      # Initialize once with cache
         cls.test_url = Safe_Str__Url(WEBSITE_URL__DEFAULT_SITE)                 # Use default test URL
