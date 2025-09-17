@@ -13,8 +13,6 @@ from osbot_utils.utils.Objects                                                  
 from mgraph_ai_web_content_filtering.wcf__fast_api.core.Html__Transformations                           import Html__Transformations, WEBSITE_URL__DEFAULT_SITE
 from osbot_utils.type_safe.primitives.domains.identifiers.safe_str.Safe_Str__Display_Name               import Safe_Str__Display_Name
 from osbot_utils.utils.Env                                                                              import get_env, load_dotenv
-from tests.integration.osbot_aws__objs_for__integration_tests                                           import setup__osbot_aws__integration_tests
-
 from osbot_utils.utils.Dev import pprint
 
 class test_Semantic__Cache__Service(TestCase):
@@ -22,7 +20,6 @@ class test_Semantic__Cache__Service(TestCase):
     @classmethod
     def setUpClass(cls):                                                              # ONE-TIME expensive setup
         pytest.skip("needs testing")
-        setup__osbot_aws__integration_tests()
         load_dotenv()
         cls.service  = Semantic__Cache__Service()                                    # Service initialization
         cls.test_url = WEBSITE_URL__DEFAULT_SITE                                     # Default test URL
