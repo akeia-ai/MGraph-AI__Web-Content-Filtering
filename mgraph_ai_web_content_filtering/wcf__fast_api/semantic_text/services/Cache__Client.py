@@ -1,11 +1,13 @@
 import hashlib
 import requests
+from requests                                                                                           import RequestException
 from typing                                                                                             import Dict, Any, Optional
 from memory_fs.schemas.Safe_Str__Cache_Hash                                                             import Safe_Str__Cache_Hash
-from requests                                                                                           import RequestException
+from osbot_utils.type_safe.primitives.domains.identifiers.Random_Guid                                   import Random_Guid
+from osbot_utils.type_safe.type_safe_core.decorators.type_safe                                          import type_safe
 from osbot_utils.decorators.methods.cache_on_self                                                       import cache_on_self
 from osbot_utils.type_safe.primitives.domains.identifiers.safe_str.Safe_Str__Id                         import Safe_Str__Id
-from mgraph_ai_web_content_filtering.wcf__fast_api.semantic_text.config.consts__Semantic_Text           import CACHE_SERVICE_URL, CACHE_NAMESPACE_DEFAULT, CACHE_STRATEGY_DEFAULT, ENV_VAR__API_KEY__SERVICE__CACHE__KEY_NAME, ENV_VAR__API_KEY__SERVICE__CACHE__KEY_VALUE
+from mgraph_ai_web_content_filtering.wcf__fast_api.semantic_text.config.consts__Semantic_Text           import CACHE_SERVICE_URL, CACHE_NAMESPACE__SEMANTIC_HTML, CACHE_STRATEGY_DEFAULT, ENV_VAR__API_KEY__SERVICE__CACHE__KEY_NAME, ENV_VAR__API_KEY__SERVICE__CACHE__KEY_VALUE
 from mgraph_ai_web_content_filtering.wcf__fast_api.semantic_text.schemas.Enum__Cache__Store__Strategy   import Enum__Cache__Store__Strategy
 from osbot_utils.type_safe.Type_Safe                                                                    import Type_Safe
 from osbot_utils.type_safe.primitives.domains.identifiers.safe_str.Safe_Str__Key                        import Safe_Str__Key
@@ -14,9 +16,9 @@ from osbot_utils.utils.Env                                                      
 
 
 
-class Cache__Client(Type_Safe):                                                 # REST client for cache.dev.mgraph.ai service v0.5.30
+class Cache__Client(Type_Safe):                                                  # REST client for cache.dev.mgraph.ai service v0.5.30
     base_url  : Safe_Str__Url = CACHE_SERVICE_URL                                # Base URL for cache service
-    namespace : Safe_Str__Key = CACHE_NAMESPACE_DEFAULT                          # Namespace for data isolation    
+    namespace : Safe_Str__Key = CACHE_NAMESPACE__SEMANTIC_HTML                   # Namespace for data isolation
 
     @cache_on_self    
     def headers(self):        
@@ -118,8 +120,9 @@ class Cache__Client(Type_Safe):                                                 
             if e.response.status_code == 404:
                 return None
             raise
-    
-    def retrieve_by_id(self, cache_id  : str                                  ,  # Retrieve data by cache ID
+
+    @type_safe
+    def retrieve_by_id(self, cache_id  : Random_Guid                                  ,  # Retrieve data by cache ID
                              namespace : Optional[Safe_Str__Key] = None
                        ) -> Optional[Dict[str, Any]]:
         namespace = namespace or self.namespace

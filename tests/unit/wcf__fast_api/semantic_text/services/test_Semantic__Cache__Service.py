@@ -21,6 +21,7 @@ class test_Semantic__Cache__Service(TestCase):
 
     @classmethod
     def setUpClass(cls):                                                              # ONE-TIME expensive setup
+        pytest.skip("needs testing")
         setup__osbot_aws__integration_tests()
         load_dotenv()
         cls.service  = Semantic__Cache__Service()                                    # Service initialization

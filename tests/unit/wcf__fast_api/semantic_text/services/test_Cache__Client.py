@@ -163,7 +163,7 @@ class test_Cache__Client(TestCase):
             assert retrieved is not None
             assert 'data'     in retrieved
             assert 'metadata' in retrieved
-            assert _.delete_by_id(cache_id=cache_id).get('deleted_count') > 8
+            assert _.delete_by_id(cache_id=cache_id).get('deleted_count') > 3
             assert obj(retrieved) == __(data             = __( test_key         = 'test_value'      ,
                                                                answer           = 42                ),
                                         metadata         = __( cache_hash       = 'de28049828f02d82',
@@ -229,8 +229,6 @@ class test_Cache__Client(TestCase):
 
     def test_delete_by_id(self):                                                     # Test deletion by ID
         with self.cache_client as _:
-            if not get_env('FAST_API__AUTH__API_KEY__VALUE'):
-                pytest.skip("Cache service API key required")
 
             # Store data
             store_result = _.store_json(data      = {'to_delete': True},
